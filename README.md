@@ -18,6 +18,7 @@ a small Norwegian company working on building products with and for clients.
 
 This code is publicly visible for transparency and portfolio purposes.
 You may view the code, but you may NOT:
+
 - Copy, modify, or distribute this code
 - Use this code in your own projects
 - Create derivative works
@@ -95,6 +96,7 @@ The development server will start at `http://localhost:4321`
 All pages are written in Norwegian for our Norwegian customers. The site includes:
 
 ### Landing Page (`/`)
+
 - Hero section with call-to-action
 - Feature overview (4 main features)
 - Technical requirements
@@ -103,17 +105,20 @@ All pages are written in Norwegian for our Norwegian customers. The site include
 ### Documentation (`/docs`)
 
 **Overview** (`/docs`)
+
 - Introduction to the plugin
 - Quick navigation to guides
 - Technical requirements
 
 **Getting Started** (`/docs/kom-i-gang`)
+
 - Installation guide
 - Quick3 API setup
 - First synchronization
 - Verification
 
 **Synchronization** (`/docs/synkronisering`)
+
 - How synchronization works
 - What gets synchronized
 - Job system explained
@@ -121,30 +126,11 @@ All pages are written in Norwegian for our Norwegian customers. The site include
 - Frequency and scheduling
 
 **Troubleshooting** (`/docs/feilsoking`)
+
 - Common issues and solutions
 - Debug tips
 - CLI tools
 - Contact information for support
-
-## Deployment to Ploi
-
-### Configuration in Ploi:
-
-1. **Create new site** in your Ploi server
-2. **Connect to Git repository** (GitHub)
-3. **Configure these settings:**
-   - **Root directory**: (leave empty, now at repo root)
-   - **Build command**: `npm ci && npm run build`
-   - **Public directory**: `dist`
-4. **Deploy** - Ploi will automatically build and serve the site
-
-### Auto-deploy
-
-Every time you push to the branch, Ploi will automatically:
-- Fetch latest code
-- Install dependencies
-- Build Astro site
-- Serve static files from `dist/`
 
 ## Contributing
 
