@@ -1,0 +1,534 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { useTranslations, type Locale } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+	return [
+		{ params: { locale: 'no' } },
+		{ params: { locale: 'en' } },
+	];
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+---
+
+<DocsLayout
+	locale={locale}
+	title={t.meta.docs.title}
+	description={t.meta.docs.description}
+	currentPath={Astro.url.pathname}
+>
+	<article class="text-base/7 text-gray-700">
+		<Breadcrumb items={[
+			{ label: t.nav.home, href: `/${locale}` },
+			{ label: t.nav.docs }
+		]} />
+		<p class="text-base/7 font-semibold text-indigo-600">{t.docs.tagline}</p>
+		<h1 class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+			{t.docs.title}
+		</h1>
+		<p class="mt-6 text-xl/8">
+			{t.docs.intro}
+		</p>
+
+		<!-- Quick Links -->
+		<div class="mt-10 border-l border-indigo-600 pl-9">
+			<h3 class="text-xl font-semibold text-gray-900">{t.docs.quickLinks.title}</h3>
+			<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+				<a href="#overview" class="text-indigo-600 hover:text-indigo-700">{t.docs.quickLinks.overview}</a>
+				<a href="#sync" class="text-indigo-600 hover:text-indigo-700">{t.docs.quickLinks.sync}</a>
+				<a href="#order-sync" class="text-indigo-600 hover:text-indigo-700">{t.docs.quickLinks.orderSync}</a>
+				<a href="#job-system" class="text-indigo-600 hover:text-indigo-700">{t.docs.quickLinks.jobSystem}</a>
+				<a href="#troubleshooting" class="text-indigo-600 hover:text-indigo-700">{t.docs.quickLinks.troubleshooting}</a>
+				<a href="#support" class="text-indigo-600 hover:text-indigo-700">{t.docs.quickLinks.support}</a>
+			</div>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h2 id="overview" class="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
+				{t.docs.overview.title}
+			</h2>
+			<p class="mt-6">
+				{t.docs.overview.intro}
+			</p>
+			<ul class="mt-8 space-y-3 text-gray-600">
+				{t.docs.overview.features.map((feature) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">✓</span>
+						<span>{feature}</span>
+					</li>
+				))}
+			</ul>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.overview.requirementsTitle}</h3>
+			<p class="mt-4">{t.docs.overview.requirementsIntro}</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.overview.requirements.map((req) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{req.label}</strong> {req.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.overview.performanceNote}"
+					</p>
+				</blockquote>
+			</figure>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h2 id="sync" class="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
+				{t.docs.sync.title}
+			</h2>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.sync.flowTitle}</h3>
+			<p class="mt-4">{t.docs.sync.flowIntro}</p>
+
+			<ol class="mt-8 space-y-6 text-gray-600 list-decimal list-inside">
+				{t.docs.sync.flowSteps.map((step) => (
+					<li><strong class="font-semibold text-gray-900">{step.label}</strong> {step.description}</li>
+				))}
+			</ol>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.sync.whatSyncTitle}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.productInfo.title}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.productInfo.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.pricing.title}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.pricing.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.inventory.title}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.inventory.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.images.title}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.images.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.variations.title}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.variations.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.sync.productConnectionsTitle}</h3>
+			<p class="mt-4">
+				{t.docs.sync.productConnectionsIntro}
+			</p>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.upsells.title}</p>
+			<p class="mt-2 text-sm">{t.docs.sync.upsells.description}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.upsells.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.crossSells.title}</p>
+			<p class="mt-2 text-sm">{t.docs.sync.crossSells.description}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.crossSells.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.metadata.title}</p>
+			<p class="mt-2 text-sm">{t.docs.sync.metadata.description}</p>
+			<ul class="mt-4 space-y-2 text-gray-600 text-sm">
+				{t.docs.sync.metadata.items.map((item) => (
+					<li class="flex gap-x-2"><span class="text-indigo-600">•</span><span>{item}</span></li>
+				))}
+			</ul>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.automatic.title}</p>
+			<p class="mt-2 text-sm">{t.docs.sync.automatic.description}</p>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.sync.viewInWooCommerce.title}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.sync.viewInWooCommerce.steps.map((step) => (
+					<li set:html={step} />
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.sync.matchingTitle}</h3>
+			<p class="mt-4">
+				{t.docs.sync.matchingDescription}
+			</p>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.sync.matchingTip}"
+					</p>
+				</blockquote>
+			</figure>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.sync.scheduleTitle}</h3>
+			<p class="mt-4">{t.docs.sync.scheduleIntro}</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.sync.scheduleOptions.map((option) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{option.label}</strong> {option.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.sync.apiLimitNote}"
+					</p>
+				</blockquote>
+			</figure>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h2 id="order-sync" class="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
+				{t.docs.orderSync.title}
+			</h2>
+
+			<p class="mt-6">
+				{t.docs.orderSync.intro}
+			</p>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.orderSync.newOrders.title}</h3>
+			<p class="mt-4">
+				{t.docs.orderSync.newOrders.description}
+			</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.orderSync.newOrders.items.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.orderSync.shipping.title}</h3>
+			<p class="mt-4">
+				{t.docs.orderSync.shipping.description}
+			</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.orderSync.shipping.items.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.orderSync.completed.title}</h3>
+			<p class="mt-4">
+				{t.docs.orderSync.completed.description}
+			</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.orderSync.completed.items.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.orderSync.returns.title}</h3>
+			<p class="mt-4">
+				{t.docs.orderSync.returns.description}
+			</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.orderSync.returns.items.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.orderSync.returns.tip}"
+					</p>
+				</blockquote>
+			</figure>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.orderSync.cancellation.title}</h3>
+			<p class="mt-4">
+				{t.docs.orderSync.cancellation.description}
+			</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.orderSync.cancellation.items.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.orderSync.cancellation.warning}"
+					</p>
+				</blockquote>
+			</figure>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.orderSync.limitations.title}</h3>
+			<p class="mt-4">
+				{t.docs.orderSync.limitations.description}
+			</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.orderSync.limitations.items.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.orderSync.limitations.note}"
+					</p>
+				</blockquote>
+			</figure>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h2 id="job-system" class="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
+				{t.docs.jobSystem.title}
+			</h2>
+
+			<p class="mt-6">
+				{t.docs.jobSystem.intro}
+			</p>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.jobSystem.typesTitle}</h3>
+
+			<div class="mt-8 space-y-6">
+				{t.docs.jobSystem.types.map((type) => (
+					<div class="border-l border-indigo-600 pl-6">
+						<p class="font-semibold text-gray-900">{type.title}</p>
+						<p class="mt-2 text-sm text-gray-600">
+							{type.description}
+						</p>
+					</div>
+				))}
+			</div>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.jobSystem.monitoringTitle}</h3>
+			<p class="mt-4">{t.docs.jobSystem.monitoringIntro}</p>
+			<ol class="mt-6 space-y-4 text-gray-600 list-decimal list-inside">
+				{t.docs.jobSystem.monitoringSteps.map((step) => (
+					<li set:html={step} />
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.jobSystem.errorTitle}</h3>
+			<p class="mt-4">{t.docs.jobSystem.errorIntro}</p>
+			<ol class="mt-6 space-y-4 text-gray-600 list-decimal list-inside">
+				{t.docs.jobSystem.errorSteps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.jobSystem.performanceTitle}</h3>
+			<p class="mt-4">{t.docs.jobSystem.performanceIntro}</p>
+			<ul class="mt-6 space-y-3 text-gray-600">
+				{t.docs.jobSystem.performanceItems.map((item) => (
+					<li class="flex gap-x-3">
+						<span class="text-indigo-600">•</span>
+						<span><strong class="font-semibold text-gray-900">{item.label}</strong> {item.description}</span>
+					</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h2 id="troubleshooting" class="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
+				{t.docs.troubleshooting.title}
+			</h2>
+
+			<p class="mt-6 text-xl/8">
+				{t.docs.troubleshooting.intro}
+			</p>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.connection.title}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.troubleshooting.connection.invalidToken.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.connection.invalidToken.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.connection.invalidToken.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.connection.cannotConnect.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.connection.cannotConnect.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.connection.cannotConnect.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.syncIssues.title}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.troubleshooting.syncIssues.noSync.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.syncIssues.noSync.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.syncIssues.noSync.steps.map((step) => (
+					<li set:html={step} />
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.syncIssues.partialSync.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.syncIssues.partialSync.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.syncIssues.partialSync.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.performance.title}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.troubleshooting.performance.slowSync.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.performance.slowSync.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.performance.slowSync.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.performance.slowSite.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.performance.slowSite.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.performance.slowSite.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.products.title}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.troubleshooting.products.duplicates.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.products.duplicates.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.products.duplicates.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.products.noImages.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.products.noImages.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.products.noImages.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.products.wrongPrices.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.products.wrongPrices.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.products.wrongPrices.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.jobs.title}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.troubleshooting.jobs.stuckJobs.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.jobs.stuckJobs.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.jobs.stuckJobs.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.jobs.noLogs.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.jobs.noLogs.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.jobs.noLogs.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.wordpress.title}</h3>
+
+			<p class="mt-6 font-semibold text-gray-900">{t.docs.troubleshooting.wordpress.cronNotRunning.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.wordpress.cronNotRunning.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.wordpress.cronNotRunning.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<p class="mt-8 font-semibold text-gray-900">{t.docs.troubleshooting.wordpress.pluginConflicts.problem}</p>
+			<p class="mt-2 text-sm font-semibold text-gray-900">{t.docs.troubleshooting.wordpress.pluginConflicts.solution}</p>
+			<ol class="mt-4 space-y-2 text-gray-600 text-sm list-decimal list-inside">
+				{t.docs.troubleshooting.wordpress.pluginConflicts.steps.map((step) => (
+					<li>{step}</li>
+				))}
+			</ol>
+
+			<h3 class="mt-10 text-xl font-semibold text-gray-900">{t.docs.troubleshooting.debugMode.title}</h3>
+			<p class="mt-4">{t.docs.troubleshooting.debugMode.description}</p>
+			<pre class="mt-6 bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{t.docs.troubleshooting.debugMode.code}</code></pre>
+			<p class="mt-4" set:html={t.docs.troubleshooting.debugMode.logLocation}></p>
+		</div>
+
+		<div class="mt-10 max-w-2xl">
+			<h2 id="support" class="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
+				{t.docs.support.title}
+			</h2>
+
+			<p class="mt-6">
+				{t.docs.support.intro}
+			</p>
+
+			<div class="mt-10 border-t border-gray-200 pt-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<a href={`/${locale}/kom-i-gang`} class="group block p-6 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors border border-gray-200 hover:border-indigo-300">
+						<div class="font-semibold text-indigo-600 mb-2 group-hover:text-indigo-700">{t.docs.support.getStarted.title}</div>
+						<p class="text-sm text-gray-600">{t.docs.support.getStarted.description}</p>
+					</a>
+					<a href={`/${locale}#contact`} class="group block p-6 bg-gray-50 rounded-xl hover:bg-indigo-50 transition-colors border border-gray-200 hover:border-indigo-300">
+						<div class="font-semibold text-indigo-600 mb-2 group-hover:text-indigo-700">{t.docs.support.contact.title}</div>
+						<p class="text-sm text-gray-600">{t.docs.support.contact.description}</p>
+					</a>
+				</div>
+			</div>
+
+			<figure class="mt-10 border-l border-indigo-600 pl-9">
+				<blockquote class="font-semibold text-gray-900">
+					<p>
+						"{t.docs.support.tip}"
+					</p>
+				</blockquote>
+			</figure>
+		</div>
+	</article>
+</DocsLayout>

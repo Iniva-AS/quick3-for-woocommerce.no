@@ -1,0 +1,289 @@
+---
+import { useTranslations, type Locale, getAlternateLocale } from '../i18n/utils';
+
+interface Props {
+	locale: Locale;
+	currentPath: string;
+}
+
+const { locale, currentPath = '' } = Astro.props;
+const t = useTranslations(locale);
+
+const navItems = [
+	{ href: `/${locale}`, label: t.nav.home },
+	{ href: `/${locale}/kom-i-gang`, label: t.nav.getStarted },
+	{ href: `/${locale}/docs`, label: t.nav.docs },
+	{ href: `/${locale}/${locale === 'no' ? 'partnere' : 'partnere'}`, label: t.nav.partners },
+	...(locale === 'no' ? [{ href: `/${locale}/blogg`, label: 'Blogg' }] : []),
+];
+
+const alternateLocale = getAlternateLocale(locale);
+const alternatePath = currentPath ? currentPath.replace(`/${locale}`, `/${alternateLocale}`) : `/${alternateLocale}`;
+const norwegianPath = currentPath ? currentPath.replace(/^\/(no|en)/, '/no') : '/no';
+const englishPath = currentPath ? currentPath.replace(/^\/(no|en)/, '/en') : '/en';
+---
+
+<header class="absolute inset-x-0 top-0 z-50">
+	<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+		<div class="flex lg:flex-1 items-center gap-x-3">
+			<a href="https://iniva.no" class="-m-1.5 p-1.5" target="_blank" rel="noopener noreferrer">
+				<img src="/iniva-logo.png" alt="Iniva" class="h-8" />
+			</a>
+			<span class="text-gray-400">/</span>
+			<a href={`/${locale}`} class="-m-1.5 p-1.5">
+				<span class="text-xl font-bold text-gray-900">Quick3 for WooCommerce</span>
+			</a>
+		</div>
+		<div class="flex lg:hidden">
+			<button
+				type="button"
+				id="mobile-menu-button"
+				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+			>
+				<span class="sr-only">{t.nav.openMenu}</span>
+				<svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+				</svg>
+			</button>
+		</div>
+		<div class="hidden lg:flex lg:gap-x-8 lg:items-center">
+			{navItems.map((item) => (
+				<a
+					href={item.href}
+					class="text-sm/6 font-semibold text-gray-900"
+					target={item.external ? '_blank' : undefined}
+					rel={item.external ? 'noopener noreferrer' : undefined}
+				>
+					{item.label}
+				</a>
+			))}
+			<!-- Language switcher dropdown -->
+			<div class="relative">
+				<button
+					type="button"
+					id="language-menu-button"
+					class="inline-flex items-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+					aria-expanded="false"
+					aria-haspopup="true"
+				>
+					<!-- Globe icon -->
+					<svg class="size-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+					</svg>
+					<span>{locale.toUpperCase()}</span>
+					<!-- Chevron down -->
+					<svg class="size-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+					</svg>
+				</button>
+				<!-- Dropdown menu -->
+				<div
+					id="language-menu"
+					class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 ease-out opacity-0 scale-95"
+					role="menu"
+					aria-orientation="vertical"
+					aria-labelledby="language-menu-button"
+				>
+					<a
+						href={norwegianPath}
+						class="group flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+						role="menuitem"
+					>
+						<span class="flex items-center gap-x-2">
+							<span class="text-lg">🇳🇴</span>
+							<span>Norsk</span>
+						</span>
+						{locale === 'no' && (
+							<svg class="size-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+							</svg>
+						)}
+					</a>
+					<a
+						href={englishPath}
+						class="group flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+						role="menuitem"
+					>
+						<span class="flex items-center gap-x-2">
+							<span class="text-lg">🇬🇧</span>
+							<span>English</span>
+						</span>
+						{locale === 'en' && (
+							<svg class="size-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+							</svg>
+						)}
+					</a>
+				</div>
+			</div>
+			<!-- Temporarily disabled - Using Freemius distribution during WordPress.org review
+			<a
+				href="https://wordpress.org/plugins/quick3-for-woocommerce/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center gap-x-2 rounded-md bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+			>
+				<svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.397-.026-.767-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
+				</svg>
+				{t.nav.wordpressOrg}
+			</a>
+			-->
+		</div>
+	</nav>
+
+	<!-- Mobile menu -->
+	<div id="mobile-menu" class="lg:hidden hidden">
+		<div class="fixed inset-0 z-50"></div>
+		<div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center gap-x-2">
+					<a href="https://iniva.no" class="-m-1.5 p-1.5" target="_blank" rel="noopener noreferrer">
+						<img src="/iniva-logo.png" alt="Iniva" class="h-6" />
+					</a>
+					<span class="text-gray-400 text-sm">/</span>
+					<a href={`/${locale}`} class="-m-1.5 p-1.5">
+						<span class="text-base font-bold text-gray-900">Quick3</span>
+					</a>
+				</div>
+				<button
+					type="button"
+					id="mobile-menu-close"
+					class="-m-2.5 rounded-md p-2.5 text-gray-700"
+				>
+					<span class="sr-only">{t.nav.closeMenu}</span>
+					<svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+			<div class="mt-6 flow-root">
+				<div class="-my-6 divide-y divide-gray-500/10">
+					<div class="space-y-2 py-6">
+						{navItems.map((item) => (
+							<a
+								href={item.href}
+								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+								target={item.external ? '_blank' : undefined}
+								rel={item.external ? 'noopener noreferrer' : undefined}
+							>
+								{item.label}
+							</a>
+						))}
+					</div>
+					<div class="py-6 space-y-2">
+						<!-- Language Options -->
+						<div class="space-y-1 mb-4">
+							<div class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+								Language
+							</div>
+							<a
+								href={norwegianPath}
+								class="-mx-3 flex items-center justify-between rounded-lg px-3 py-2 text-base/7 font-semibold hover:bg-gray-50"
+								class:list={[locale === 'no' ? 'text-blue-600 bg-blue-50' : 'text-gray-900']}
+							>
+								<span class="flex items-center gap-x-2">
+									<span class="text-lg">🇳🇴</span>
+									<span>Norsk</span>
+								</span>
+								{locale === 'no' && (
+									<svg class="size-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+									</svg>
+								)}
+							</a>
+							<a
+								href={englishPath}
+								class="-mx-3 flex items-center justify-between rounded-lg px-3 py-2 text-base/7 font-semibold hover:bg-gray-50"
+								class:list={[locale === 'en' ? 'text-blue-600 bg-blue-50' : 'text-gray-900']}
+							>
+								<span class="flex items-center gap-x-2">
+									<span class="text-lg">🇬🇧</span>
+									<span>English</span>
+								</span>
+								{locale === 'en' && (
+									<svg class="size-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+									</svg>
+								)}
+							</a>
+						</div>
+						<!-- Temporarily disabled - Using Freemius distribution during WordPress.org review
+						<a
+							href="https://wordpress.org/plugins/quick3-for-woocommerce/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="-mx-3 flex items-center gap-x-2 rounded-lg bg-blue-600 px-3 py-2.5 text-base font-semibold text-white hover:bg-blue-500"
+						>
+							<svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.397-.026-.767-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
+							</svg>
+							{t.nav.wordpressOrg}
+						</a>
+						-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<script>
+	// Mobile menu
+	const mobileMenuButton = document.getElementById('mobile-menu-button');
+	const mobileMenu = document.getElementById('mobile-menu');
+	const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+	mobileMenuButton?.addEventListener('click', () => {
+		mobileMenu?.classList.remove('hidden');
+	});
+
+	mobileMenuClose?.addEventListener('click', () => {
+		mobileMenu?.classList.add('hidden');
+	});
+
+	// Language dropdown
+	const languageMenuButton = document.getElementById('language-menu-button');
+	const languageMenu = document.getElementById('language-menu');
+	let isLanguageMenuOpen = false;
+
+	function toggleLanguageMenu() {
+		isLanguageMenuOpen = !isLanguageMenuOpen;
+
+		if (isLanguageMenuOpen) {
+			languageMenu?.classList.remove('hidden');
+			languageMenuButton?.setAttribute('aria-expanded', 'true');
+			// Trigger reflow for animation
+			setTimeout(() => {
+				languageMenu?.classList.remove('opacity-0', 'scale-95');
+				languageMenu?.classList.add('opacity-100', 'scale-100');
+			}, 10);
+		} else {
+			languageMenu?.classList.remove('opacity-100', 'scale-100');
+			languageMenu?.classList.add('opacity-0', 'scale-95');
+			languageMenuButton?.setAttribute('aria-expanded', 'false');
+			setTimeout(() => {
+				languageMenu?.classList.add('hidden');
+			}, 200);
+		}
+	}
+
+	languageMenuButton?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		toggleLanguageMenu();
+	});
+
+	// Close dropdown when clicking outside
+	document.addEventListener('click', (e) => {
+		if (isLanguageMenuOpen && languageMenu && !languageMenu.contains(e.target as Node)) {
+			toggleLanguageMenu();
+		}
+	});
+
+	// Close dropdown on escape key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && isLanguageMenuOpen) {
+			toggleLanguageMenu();
+		}
+	});
+</script>

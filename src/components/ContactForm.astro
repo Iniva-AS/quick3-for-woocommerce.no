@@ -1,0 +1,228 @@
+---
+import { useTranslations, type Locale } from '../i18n/utils';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// You can set the n8n webhook URL via environment variable or pass it as a prop
+const n8nWebhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || '';
+---
+
+<div id="contact" class="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+  <div
+    aria-hidden="true"
+    class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+  >
+    <div
+      style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+      class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+    />
+  </div>
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{t.contact.title}</h2>
+    <p class="mt-2 text-lg/8 text-gray-600">{t.contact.description}</p>
+  </div>
+  <form id="contact-form" data-n8n-url={n8nWebhookUrl} class="mx-auto mt-16 max-w-xl sm:mt-20">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+      <div class="sm:col-span-2">
+        <label for="name" class="block text-sm/6 font-semibold text-gray-900">
+          {t.contact.form.name}
+        </label>
+        <div class="mt-2.5">
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+            class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+          />
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="company" class="block text-sm/6 font-semibold text-gray-900">
+          {t.contact.form.company}
+        </label>
+        <div class="mt-2.5">
+          <input
+            id="company"
+            name="company"
+            type="text"
+            autocomplete="organization"
+            class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+          />
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="email" class="block text-sm/6 font-semibold text-gray-900">
+          {t.contact.form.email}
+        </label>
+        <div class="mt-2.5">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+          />
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="phone-number" class="block text-sm/6 font-semibold text-gray-900">
+          {t.contact.form.phone}
+        </label>
+        <div class="mt-2.5">
+          <input
+            id="phone-number"
+            name="phone-number"
+            type="text"
+            autocomplete="tel"
+            class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+          />
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="message" class="block text-sm/6 font-semibold text-gray-900">
+          {t.contact.form.message}
+        </label>
+        <div class="mt-2.5">
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+          ></textarea>
+        </div>
+      </div>
+      <div class="flex gap-x-4 sm:col-span-2">
+        <div class="flex h-6 items-center">
+          <div class="group relative inline-flex w-8 shrink-0 rounded-full bg-gray-200 p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out has-[:checked]:bg-blue-600">
+            <span class="size-4 translate-x-0 rounded-full bg-white shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out group-has-[:checked]:translate-x-3.5"></span>
+            <input
+              id="agree-to-policies"
+              name="agree-to-policies"
+              type="checkbox"
+              required
+              aria-label="Agree to policies"
+              class="absolute inset-0 appearance-none focus:outline-2 focus:outline-offset-2 focus:outline-blue-600"
+            />
+          </div>
+        </div>
+        <label for="agree-to-policies" class="text-sm/6 text-gray-600">
+          {t.contact.form.privacyText}{' '}
+          <a href={`/${locale}/personvernserklæring`} class="whitespace-nowrap font-semibold text-blue-600">
+            {t.contact.form.privacyLink}
+          </a>.
+        </label>
+      </div>
+    </div>
+    <div class="mt-10">
+      <button
+        type="submit"
+        class="block w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        data-submit-text={t.contact.form.submit}
+        data-sending-text={t.contact.form.sending}
+      >
+        {t.contact.form.submit}
+      </button>
+    </div>
+    <div id="form-status" class="mt-4 text-center text-sm hidden"></div>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+  const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  // Get localized messages from data attributes or defaults
+  const messages = {
+    configError: submitButton?.closest('form')?.querySelector('[data-config-error]')?.getAttribute('data-config-error') || 'Configuration error. Please contact support.',
+    success: submitButton?.closest('form')?.querySelector('[data-success]')?.getAttribute('data-success') || 'Thank you! Your message has been sent successfully.',
+    error: submitButton?.closest('form')?.querySelector('[data-error]')?.getAttribute('data-error') || 'Failed to send message. Please try again.',
+    submitText: submitButton?.getAttribute('data-submit-text') || 'Send message',
+    sendingText: submitButton?.getAttribute('data-sending-text') || 'Sending...',
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const n8nUrl = form.dataset.n8nUrl;
+
+    if (!n8nUrl) {
+      console.error('N8N webhook URL not configured');
+      statusDiv.textContent = messages.configError;
+      statusDiv.className = 'mt-4 text-center text-sm text-red-600';
+      statusDiv.classList.remove('hidden');
+      return;
+    }
+
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get('name'),
+      company: formData.get('company'),
+      email: formData.get('email'),
+      phoneNumber: formData.get('phone-number'),
+      message: formData.get('message'),
+      agreeToPolicy: formData.get('agree-to-policies') === 'on',
+      timestamp: new Date().toISOString(),
+    };
+
+    submitButton.disabled = true;
+    submitButton.textContent = messages.sendingText;
+
+    try {
+      const response = await fetch(n8nUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // ═══════════════════════════════════════════════════════════════
+        // CONVERSION TRACKING: Contact Form Success
+        // ═══════════════════════════════════════════════════════════════
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'contact_form_submit',
+          'form_type': 'contact',
+          'form_name': 'Contact Form',
+          'form_success': true,
+          'event_category': 'Contact',
+          'event_action': 'Form Submit',
+          'event_label': 'Contact Form Submission'
+        });
+
+        // Log to console for debugging (remove in production if desired)
+        console.log('📩 Contact Form Submission Tracked:', {
+          formType: 'contact',
+          success: true,
+          timestamp: new Date().toISOString()
+        });
+
+        statusDiv.textContent = messages.success;
+        statusDiv.className = 'mt-4 text-center text-sm text-green-600';
+        statusDiv.classList.remove('hidden');
+        form.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      statusDiv.textContent = messages.error;
+      statusDiv.className = 'mt-4 text-center text-sm text-red-600';
+      statusDiv.classList.remove('hidden');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = messages.submitText;
+    }
+  });
+</script>

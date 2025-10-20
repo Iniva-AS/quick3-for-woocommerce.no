@@ -1,0 +1,856 @@
+{
+	"nav": {
+		"home": "Hjem",
+		"getStarted": "Kom i gang",
+		"docs": "Dokumentasjon",
+		"partners": "Partnere",
+		"wordpressOrg": "WordPress.org",
+		"openMenu": "Open main menu",
+		"closeMenu": "Close menu"
+	},
+	"hero": {
+		"title": "Quick3 og WooCommerce ERP-integrasjon – helt automatisk",
+		"subtitle": "Øk salg og konverteringer ved å bruke WooCommerce for din quick3-nettbutikk.",
+		"description": "Kombinér styrkene: La Quick3 håndtere økonomi, lager og logistikk. La WooCommerce skape salget med profesjonelt design, moderne checkout og sømløs brukeropplevelse.",
+		"ctaPrimary": "Kom i gang selv",
+		"ctaPrimaryPartner": "Få hjelp fra partner",
+		"ctaSecondary": "Les dokumentasjon",
+		"ctaSecondaryArrow": "→"
+	},
+	"features": {
+		"heading": "Automatiser alt",
+		"title": "Alt du trenger for sømløs synkronisering",
+		"description": "Quick3 for WooCommerce gjør det enkelt å holde produkter og lager synkronisert mellom Quick3 ERP og WooCommerce. Robust bakgrunnsprosessering håndterer store kataloger uten problemer.",
+		"productSync": {
+			"name": "Automatisk produktsynkronisering",
+			"description": "Importer og oppdater produkter fra Quick3 til WooCommerce automatisk. Produktinformasjon, bilder, priser og varianter holdes alltid oppdatert – uten manuelt arbeid."
+		},
+		"orderSync": {
+			"name": "Sanntids ordresynkronisering",
+			"description": "Ordre fra WooCommerce overføres øyeblikkelig til Quick3 med komplette kundedata og betalingsinformasjon. Ingen forsinkelser, ingen manuelle inngrep."
+		},
+		"multiWarehouse": {
+			"name": "Flerlagerstyring",
+			"description": "Hold lagerbeholdningen oppdatert på tvers av alle lokasjoner. Kundene kan se tilgjengelighet per lager direkte i nettbutikken – perfekt for fysiske butikker med flere lokasjoner."
+		},
+		"smartPricing": {
+			"name": "Intelligent prissetting",
+			"description": "Avansert prissystem med støtte for ordinær pris, kampanjepriser, tidsbaserte kampanjer, volumrabatter og kundeprislister. Alt synkroniseres automatisk."
+		},
+		"backgroundProcessing": {
+			"name": "Pålitelig bakgrunnsprosessering",
+			"description": "Robust jobsystem håndterer store kataloger uten problemer. Prosessene kjører i bakgrunnen uten å påvirke butikkens ytelse, med automatisk feilhåndtering og selvhelbredende funksjoner."
+		},
+		"wordpressNative": {
+			"name": "WordPress-native plugin",
+			"description": "Bygget med WordPress og WooCommerce standarder. Følger beste praksis for ytelse, sikkerhet og vedlikehold. Full støtte for WooCommerce hooks og filters for utviklere."
+		}
+	},
+	"faq": {
+		"title": "Ofte stilte spørsmål",
+		"items": [
+			{
+				"question": "Kan jeg få hjelp til å sette opp pluginen?",
+				"answer": "Ja! Våre <a href=\"/no/partnere\" class=\"text-indigo-600 hover:text-indigo-500 underline\">partnere</a> kan hjelpe deg med profesjonelt oppsett og support."
+			},
+			{
+				"question": "Hva er Quick3 for WooCommerce?",
+				"answer": "Quick3 for WooCommerce er en WordPress-plugin som automatisk synkroniserer produkter, priser, lager, ordre og kunder mellom Quick3 ERP og din WooCommerce-butikk. Alt kjører i bakgrunnen, så nettbutikken din holdes oppdatert med Quick3-systemet uten at du trenger å gjøre noe manuelt."
+			},
+			{
+				"question": "Hva er systemkravene?",
+				"answer": "Plugin-en krever: WordPress 6.0 eller nyere, WooCommerce 7.0 eller nyere, PHP 8.1 eller nyere, WP-CLI installert på serveren, og en gyldig Quick3 API-token. Vi anbefaler sterkt en VPS med flere CPU-kjerner fremfor standard webhotell, da synkroniseringen krever prosesseringskraft for datatransformasjon og produktmatching."
+			},
+			{
+				"question": "Hvordan får jeg en Quick3 API-token?",
+				"answer": "Du henter API-tokenet fra din Quick3-konto. Når du har det, legger du det til i WordPress-konfigurasjonen ved å definere QUICK3_TOKEN i wp-config.php-filen din: define('QUICK3_TOKEN', 'ditt-api-token-her'); Les \"Kom i gang\"-guiden for mer informasjon om denne prosessen. Plugin-en viser konfigurasjonsstatus på Quick3 Settings-siden."
+			},
+			{
+				"question": "Hvor ofte synkroniseres data mellom Quick3 og WooCommerce?",
+				"answer": "Synkroniseringsfrekvens avhenger av abonnementet ditt: Free (kun manuell synkronisering), Business (hvert 30. minutt), Enterprise (hvert 15. minutt). Du kan konfigurere dette under WP Admin > Quick3 Settings > Synchronization Settings."
+			},
+			{
+				"question": "Hvilke data synkroniseres?",
+				"answer": "Plugin-en synkroniserer: produkter og produktvarianter, produktnavn, beskrivelser og attributter, ordinære priser og kampanjepriser (inkludert tidsbaserte kampanjer), lagernivåer og lagerstatus, produktbilder, ordre (fra WooCommerce til Quick3), og kundeinformasjon."
+			},
+			{
+				"question": "Hva er produktgrensene for hver plan?",
+				"answer": "Free: Opptil 50 produkter, Business: Opptil 10 000 produkter, Enterprise: Ubegrenset antall produkter. Plugin-en viser ditt nåværende forbruk og grenser på Quick3 Settings-siden med en visuell fremdriftslinje."
+			},
+			{
+				"question": "Fungerer plugin-en med Quick3 sine API-begrensninger?",
+				"answer": "Ja, plugin-en er designet for å fungere innenfor Quick3 sine strenge API-begrensninger. I stedet for å gjøre separate API-kall for hver lageroppdatering, henter plugin-en alle produkter periodisk (basert på abonnementet ditt). Dette holder seg godt innenfor API-grensene samtidig som lageret ditt forblir synkronisert."
+			},
+			{
+				"question": "Hva skjer med mine eksisterende WooCommerce-produkter?",
+				"answer": "Plugin-en sletter ikke eksisterende WooCommerce-produkter. Den oppretter en kobling mellom Quick3-produkter og WooCommerce-produkter ved hjelp av varenummer (SKU) og metadata. Hvis et produkt finnes fra før, oppdateres det. Hvis ingen match finnes, opprettes et nytt produkt. Eksisterende produkter som ikke kommer fra Quick3 forblir urørt."
+			},
+			{
+				"question": "Hvordan feilsøker jeg hvis produkter ikke synkroniseres?",
+				"answer": "Sjekk disse vanlige problemene først: Verifiser at Quick3 API-tokenet er korrekt konfigurert i Quick3 Settings, kontroller at WordPress cron fungerer som det skal, se jobbstatus under WP Admin > Jobs for å sjekke om noen jobber feilet, sjekk jobbloggene for spesifikke feilmeldinger, og sørg for at du ikke har nådd produktgrensen for abonnementet ditt."
+			},
+			{
+				"question": "Kan jeg utløse en synkronisering manuelt i stedet for å vente på automatisk synk?",
+				"answer": "Ja! Du kan når som helst utløse en produktsynkronisering manuelt fra WP Admin > Quick3 for WooCommerce > Jobs. Klikk \"New job\" og velg jobben du vil kjøre. Dette er nyttig for å teste tilkoblingen eller umiddelbart oppdatere etter endringer i Quick3. Quick3 sine API-begrensninger gjelder fortsatt, men plugin-en har innebygd beskyttelse som forhindrer at du overskriver disse grensene."
+			}
+		]
+	},
+	"pricing": {
+		"heading": "Priser",
+		"title": "Priser som vokser med deg",
+		"description": "Velg en prisplan som passer dine behov. Alle planer inkluderer automatisk synkronisering og pålitelig bakgrunnsprosessering.",
+		"frequency": {
+			"monthly": "Månedlig",
+			"annually": "Årlig"
+		},
+		"perMonth": "/måned",
+		"perYear": "/år",
+		"mostPopular": "Mest populær",
+		"choosePlan": "Velg plan",
+		"getFreeStart": "Kom i gang gratis",
+		"tiers": {
+			"free": {
+				"name": "Free",
+				"description": "Kom i gang med grunnleggende synkronisering for små kataloger.",
+				"features": [
+					"Ingen support",
+					"50 produkter",
+					"1 dags loggbevaring",
+					"Produktsynkronisering hver time"
+				]
+			},
+			"business": {
+				"name": "Business",
+				"description": "For voksende bedrifter med aktiv produktstyring og support.",
+				"features": [
+					"E-post support",
+					"10 000 produkter",
+					"30 dagers loggbevaring",
+					"Produktsynkronisering hvert 30. minutt"
+				]
+			},
+			"enterprise": {
+				"name": "Enterprise",
+				"description": "Premium løsning med ubegrenset kapasitet og prioritert support.",
+				"features": [
+					"Prioritert e-post support",
+					"Ubegrenset antall produkter",
+					"Ubegrenset loggbevaring",
+					"Produktsynkronisering hvert 15. minutt"
+				]
+			}
+		}
+	},
+	"contact": {
+		"title": "Kontakt oss",
+		"description": "Få hjelp med eksisterende installasjon eller oppsett av ny.",
+		"form": {
+			"name": "Navn",
+			"company": "Bedrift",
+			"email": "E-post",
+			"phone": "Telefon.nr:",
+			"message": "Melding",
+			"submit": "Send melding",
+			"sending": "Sender...",
+			"privacyText": "Ved å huke av her, godtar du vår",
+			"privacyLink": "personvernserklæring",
+			"successMessage": "Takk! Din melding har blitt sendt.",
+			"errorMessage": "Kunne ikke sende melding. Prøv igjen.",
+			"configError": "Konfigurasjonsfeil. Vennligst kontakt support."
+		}
+	},
+	"partners": {
+		"title": "Våre partnere",
+		"subtitle": "Få profesjonell hjelp til oppsett",
+		"description": "Våre partnere er erfarne fagfolk som kan hjelpe deg med å komme i gang, sette opp integrasjonen, og gi løpende support.",
+		"learnMore": "Les mer",
+		"viewAll": "Se alle partnere",
+		"backToPartners": "← Tilbake til partnere",
+		"contactPartner": "Kontakt partner",
+		"services": "Tjenester",
+		"location": "Lokasjon",
+		"website": "Besøk nettside",
+		"email": "Send e-post",
+		"phone": "Ring oss",
+		"noPartnersYet": "Vi legger til partnere fortløpende. Sjekk tilbake snart!",
+		"cta": {
+			"title": "Bli implementeringspartner",
+			"description": "Er du utvikler eller byrå som jobber med WooCommerce og ERP-integrasjoner? Bli en offisiell Quick3 for WooCommerce-partner og få tilgang til et voksende marked av kunder som trenger profesjonell hjelp med oppsett, tilpasninger og vedlikehold.",
+			"primaryButton": "Søk om partnerskap",
+			"secondaryButton": "Les mer om partnerprogrammet"
+		},
+		"meta": {
+			"title": "Partnere - Quick3 for WooCommerce",
+			"description": "Finn profesjonelle partnere som kan hjelpe deg med oppsett og drift av Quick3 for WooCommerce."
+		}
+	},
+	"footer": {
+		"copyright": "Iniva AS. Quick3 for WooCommerce is a product by Iniva.",
+		"privacy": "Personvernserklæring"
+	},
+	"getStarted": {
+		"tagline": "Quick3 for WooCommerce",
+		"title": "Kom i gang på under 10 minutter",
+		"intro": "Følg denne enkle veiledningen for å koble Quick3 ERP til WooCommerce. Med 7 enkle steg får du automatisk synkronisering av produkter, priser, ordre og lagerbeholdning.",
+		"downloadSection": {
+			"title": "Last ned plugin",
+			"description": "Kom i gang gratis ved å laste ned Quick3 for WooCommerce-pluginen. Ingen kredittkort påkrevd.",
+			"buttonText": "Last ned gratis"
+		},
+		"step1": {
+			"title": "1. Installer pluginen",
+			"description": "Finn og installer Quick3 for WooCommerce fra WordPress plugin-katalogen. Prosessen tar bare noen få minutter og krever ingen teknisk ekspertise.",
+			"steps": [
+				"<strong class=\"font-semibold text-gray-900\">Logg inn på WordPress</strong> og gå til admin-panelet hvor du administrerer nettstedet ditt.",
+				"<strong class=\"font-semibold text-gray-900\">Plugins → Legg til ny</strong> for å finne og installere nye WordPress-plugins.",
+				"<strong class=\"font-semibold text-gray-900\">Søk etter \"Quick3 for WooCommerce\"</strong> i plugin-katalogen og klikk Installer nå.",
+				"<strong class=\"font-semibold text-gray-900\">Aktiver pluginen</strong> etter installasjon for å komme i gang."
+			],
+			"warning": "Viktig: Sørg for at WooCommerce allerede er installert og aktivert før du installerer Quick3 for WooCommerce."
+		},
+		"step2": {
+			"title": "2. Aktiver lisens",
+			"description": "Aktiver eller kjøp Freemius-lisensen for å få tilgang til alle funksjoner. Pluginen tilbyr både gratis og betalte alternativer avhengig av dine behov.",
+			"steps": [
+				"<strong class=\"font-semibold text-gray-900\">Følg Freemius-instruksjonene</strong> som vises etter aktivering av pluginen.",
+				"<strong class=\"font-semibold text-gray-900\">Velg lisenstype</strong> – gratis for testing eller betalt for produksjon med prioritert support.",
+				"<strong class=\"font-semibold text-gray-900\">Bedriftsbruk?</strong> Betalt lisens anbefales for produksjonsmiljøer med dedikert støtte."
+			]
+		},
+		"step3": {
+			"title": "3. Skaff Quick3 API-token",
+			"description": "For å koble til Quick3 ERP trenger du en API-token. Denne genereres direkte fra din Quick3-konto og gir pluginen sikker tilgang til produktdata.",
+			"steps": [
+				"<strong class=\"font-semibold text-gray-900\">Logg inn på Quick3</strong> med din bedriftskonto.",
+				"<strong class=\"font-semibold text-gray-900\">Gå til Hjem → Klientinnstillinger → Sikkerhet</strong> for å administrere API-tilgang.",
+				"<strong class=\"font-semibold text-gray-900\">Generer ny token</strong> og velg ApiV2 som api type. Husk å marker denne som aktiv.",
+				"<strong class=\"font-semibold text-gray-900\">Kopier API nøkkelen</strong> og ha den klar til neste steg."
+			],
+			"warning": "Dersom du ikke har tilgang til API-innstillinger, kontakt Quick3 support for å få aktivert API-tilgang på din konto. Vi bruker V2 API (BETA)."
+		},
+		"step4": {
+			"title": "4. Konfigurer Quick3-tilkobling",
+			"description": "API nøkkelen skal legges inn i wp-config.php filen da denne er sikrere enn å legge den inn via admin-panelet.",
+			"substep1": {
+				"title": "Steg 1: wp-config.php",
+				"description": "Rediger <code class=\"text-sm font-mono text-gray-900\">wp-config.php</code> og legg til følgende linjer over <code class=\"text-sm font-mono text-gray-900\">/* That's all, stop editing! */</code>:",
+				"code": "// Quick3 API Configuration\ndefine('QUICK3_TOKEN', 'din-api-token-her');"
+			},
+			"substep2": {
+				"title": "Steg 2: Via admin-panel",
+				"steps": [
+					"<strong class=\"font-semibold text-gray-900\">Gå til Quick3 for WooCommerce → Innstillinger</strong> i WordPress-menyen.",
+					"<strong class=\"font-semibold text-gray-900\">Fyll inn Base URL:</strong> Denne finner du i Quick3 ved å se på URLen. Du legger inn det som ligner på denne: <code class=\"text-sm font-mono text-gray-900\">https://q3.quick.no/ProdShared021</code>",
+					"<strong class=\"font-semibold text-gray-900\">Lagre og test tilkoblingen</strong> for å verifisere at alt fungerer."
+				]
+			}
+		},
+		"step5": {
+			"title": "5. Konfigurer ordreinnstillinger",
+			"description": "Koble WooCommerce betalingsmetoder til Quick3 betalingsbetingelser for automatisk ordresynkronisering. Dette sikrer at ordre behandles korrekt i Quick3 basert på hvordan kunden betaler.",
+			"steps": [
+				"<strong class=\"font-semibold text-gray-900\">Gå til Quick3 for wooCommerce → Innstillinger → Order Settings</strong> i WordPress-menyen.",
+				"<strong class=\"font-semibold text-gray-900\">Aktiver Auto-sync orders to Quick3</strong> for automatisk ordresynkronisering.",
+				"<strong class=\"font-semibold text-gray-900\">Match betalingsmetoder:</strong> Match betalingsmetoden i WooCommerce med riktig konto i Quick3.",
+				"<strong class=\"font-semibold text-gray-900\">Velg standard konto for nye produkter:</strong> Dersom det er et produkt i WooCommerce som ikke finnes i Quick3, så må du velge en standard konto som dette skal føres mot i Quick3.",
+				"<strong class=\"font-semibold text-gray-900\">Lagre innstillingene</strong> når du er ferdig med konfigurasjonen."
+			],
+			"note": "Betalingsbetingelsene hentes automatisk fra Quick3 når tilkoblingen er konfigurert, slik at du alltid har oppdaterte alternativer å velge mellom."
+		},
+		"step6": {
+			"title": "6. Verifiser synkroniseringsjobber",
+			"description": "Nå som alt er konfigurert, sjekk at automatiske synkroniseringsjobber kjører som forventet.",
+			"steps": [
+				"<strong class=\"font-semibold text-gray-900\">Gå til Quick3 for WooCommerce → Jobber</strong> for å se jobbstatus.",
+				"<strong class=\"font-semibold text-gray-900\">Se etter jobbkjøringer</strong> som starter automatisk basert på konfigurert intervall.",
+				"<strong class=\"font-semibold text-gray-900\">Klikk på en jobb</strong> for å se detaljert status og logger i sanntid.",
+				"<strong class=\"font-semibold text-gray-900\">Vent på \"Completed\" status</strong> – første synk kan ta noen minutter avhengig av produktantall."
+			],
+			"syncTitle": "Hva synkroniseres?",
+			"syncItems": [
+				"Produkter fra Quick3 til WooCommerce",
+				"Priser og salg",
+				"Lagerbeholdning",
+				"Produktbilder",
+				"Produktvarianter"
+			]
+		},
+		"step7": {
+			"title": "7. Bekreft ordresynkronisering",
+			"description": "Siste steg er å teste at ordre synkroniseres korrekt tilbake til Quick3. Dette sikrer at hele flyten fra nettbutikk til ERP-system fungerer sømløst.",
+			"steps": [
+				"<strong class=\"font-semibold text-gray-900\">Gå til WooCommerce-nettbutikken</strong> og legg en testordre.",
+				"<strong class=\"font-semibold text-gray-900\">Fullfør betalingen</strong> og pass på at ordren har kommet til \"processing\".",
+				"<strong class=\"font-semibold text-gray-900\">Logg inn på Quick3</strong> og verifiser at ordren vises der.",
+				"<strong class=\"font-semibold text-gray-900\">Sjekk detaljer</strong> – kunde-, produkt- og betalingsinformasjon skal være korrekt."
+			],
+			"congratulations": "Gratulerer! Quick3 for WooCommerce er nå fullstendig konfigurert og klar til bruk. Du har automatisk synkronisering av produkter, priser, lager og ordre."
+		},
+		"readyToGo": {
+			"title": "Du er klar til å gå live!",
+			"paragraph1": "Quick3 for WooCommerce vil nå automatisk holde produkter, priser og lagerbeholdning synkronisert mellom Quick3 ERP og WooCommerce. Ordre sendes automatisk til Quick3 når de er betalt, og alt skjer i bakgrunnen uten at du trenger å gjøre noe.",
+			"paragraph2": "Synkroniseringen kjører automatisk hver 15. minutt (om du har enterprise), noe som betyr at produktdata og lagerstatus alltid er oppdatert. Du kan når som helst sjekke status på jobbene i admin-panelet eller justere innstillinger etter behov."
+		},
+		"nextSteps": {
+			"title": "Neste steg",
+			"docs": {
+				"title": "Les dokumentasjonen →",
+				"description": "Lær mer om hvordan synkronisering fungerer og utforsk avanserte funksjoner"
+			},
+			"contact": {
+				"title": "Trenger du hjelp? →",
+				"description": "Kontakt oss for support, assistanse eller spørsmål om oppsettet"
+			}
+		}
+	},
+	"docs": {
+		"tagline": "Komplett veiledning",
+		"title": "Dokumentasjon",
+		"intro": "Komplett brukerveiledning for Quick3 for WooCommerce. Denne dokumentasjonen dekker alle aspekter av pluginen, fra tekniske detaljer til feilsøking.",
+		"quickLinks": {
+			"title": "Snarvei",
+			"overview": "→ Oversikt",
+			"sync": "→ Hvordan synkronisering fungerer",
+			"orderSync": "→ Synkronisering av ordre",
+			"jobSystem": "→ Jobsystemet",
+			"troubleshooting": "→ Feilsøking",
+			"support": "→ Support"
+		},
+		"overview": {
+			"title": "Oversikt",
+			"intro": "Quick3 for WooCommerce er en WordPress-plugin som automatisk synkroniserer produktdata mellom Quick3 ERP-systemet og WooCommerce-butikken din. Pluginen håndterer:",
+			"features": [
+				"Automatisk produktimport fra Quick3",
+				"Automatisk oppdatering av lagerbeholdning",
+				"Prissynkronisering inkludert kampanjepriser",
+				"Produktbilder og varianter",
+				"Ordresynkronisering tilbake til Quick3",
+				"Bakgrunnsprosessering for store kataloger"
+			],
+			"requirementsTitle": "Tekniske krav",
+			"requirementsIntro": "For å bruke Quick3 for WooCommerce trenger du:",
+			"requirements": [
+				{
+					"label": "WordPress",
+					"description": "versjon 6.0 eller nyere"
+				},
+				{
+					"label": "WooCommerce",
+					"description": "versjon 7.0 eller nyere"
+				},
+				{
+					"label": "PHP",
+					"description": "versjon 8.1 eller nyere"
+				},
+				{
+					"label": "WP-CLI",
+					"description": "installert på serveren"
+				},
+				{
+					"label": "Quick3 API-tilgang",
+					"description": "med gyldig API-token"
+				}
+			],
+			"performanceNote": "Anbefalt: VPS med flere CPU-kjerner gir betydelig bedre ytelse enn standard webhotell. Synkroniseringen krever prosesseringskraft for datatransformasjon og produktmatching, spesielt for store produktkataloger."
+		},
+		"sync": {
+			"title": "Hvordan synkronisering fungerer",
+			"flowTitle": "Synkroniseringsflyt",
+			"flowIntro": "Synkroniseringsprosessen følger disse stegene:",
+			"flowSteps": [
+				{
+					"label": "Henting:",
+					"description": "Produktdata hentes fra Quick3 API"
+				},
+				{
+					"label": "Transformasjon:",
+					"description": "Data konverteres til WooCommerce-format"
+				},
+				{
+					"label": "Matching:",
+					"description": "Eksisterende produkter matches via SKU"
+				},
+				{
+					"label": "Oppdatering:",
+					"description": "Produkter opprettes eller oppdateres i WooCommerce"
+				},
+				{
+					"label": "Bilder:",
+					"description": "Produktbilder lastes ned og legges til i WordPress mediebibliotek"
+				},
+				{
+					"label": "Verifisering:",
+					"description": "Endringer verifiseres og logges"
+				}
+			],
+			"whatSyncTitle": "Hva synkroniseres?",
+			"productInfo": {
+				"title": "Produktinformasjon",
+				"items": [
+					"Produktnavn og beskrivelse",
+					"SKU (Stock Keeping Unit)",
+					"Strekkode (synkroniseres til GTIN-felt i WooCommerce)",
+					"Produktkategorier",
+					"Produktattributter",
+					"Dimensjoner og vekt"
+				]
+			},
+			"pricing": {
+				"title": "Priser",
+				"items": [
+					"Vanlig pris",
+					"Kampanjepris (salg)",
+					"Prisperioder (fra/til dato)",
+					"MVA-håndtering"
+				]
+			},
+			"inventory": {
+				"title": "Lagerbeholdning",
+				"items": [
+					"Antall på lager",
+					"Lagerstatus (på lager / utsolgt)"
+				]
+			},
+			"images": {
+				"title": "Bilder",
+				"items": [
+					"Hovedproduktbilde",
+					"Produktgalleri",
+					"Variantbilder"
+				]
+			},
+			"variations": {
+				"title": "Varianter",
+				"items": [
+					"Produktvarianter (størrelser, farger, etc.)",
+					"Variantpriser",
+					"Variantlager",
+					"Variantattributter"
+				]
+			},
+			"matchingTitle": "Matching av produkter",
+			"matchingDescription": "For å unngå duplikater matcher Quick3 for WooCommerce produkter basert på SKU (Stock Keeping Unit). Hvis et produkt med samme SKU allerede eksisterer i WooCommerce, oppdateres det i stedet for å opprette et nytt produkt.",
+			"matchingTip": "Tips: Hold SKU-verdier konsistente mellom Quick3 og WooCommerce for best resultat. Unngå å endre SKU manuelt i WooCommerce.",
+			"scheduleTitle": "Frekvens og planlegging",
+			"scheduleIntro": "Du kan konfigurere hvor ofte synkronisering skal kjøre:",
+			"scheduleOptions": [
+				{
+					"label": "Hver 15. minutt:",
+					"description": "Anbefalt for bedrifter med høy omsetning"
+				},
+				{
+					"label": "Hver 30. minutt:",
+					"description": "Standard for de fleste butikker"
+				},
+				{
+					"label": "Time:",
+					"description": "For butikker med sjeldne produktendringer"
+				},
+				{
+					"label": "Hver 2. time:",
+					"description": "Minimum anbefalt frekvens"
+				},
+				{
+					"label": "Manuell:",
+					"description": "Kun når du starter jobben manuelt"
+				}
+			],
+			"apiLimitNote": "Viktig: Quick3 API har en rate limit på ca. 4 forespørsler per time for batch operasjoner. Pluginen henter alle produkter hvert 15. minutt i stedet for separate lageroppdateringer for å unngå å overskride denne grensen.",
+			"productConnectionsTitle": "Produktrelasjoner",
+			"productConnectionsIntro": "Quick3 for WooCommerce synkroniserer automatisk produktrelasjoner fra Quick3 til WooCommerce. Disse relasjonene hjelper kundene med å oppdage relaterte produkter og øker gjennomsnittlig ordrestørrelse.",
+			"upsells": {
+				"title": "Mersalg-produkter (Alternative produkter)",
+				"description": "Alternative produkter fra Quick3 blir mersalgsforslag i WooCommerce. Dette er toveis-relasjoner mellom hovedprodukter.",
+				"items": [
+					"Quick3 'Alternative' koblingstype mappes til WooCommerce mersalg",
+					"Vises på produktsider som \"Du kan også like...\"",
+					"Toveis: Hvis Produkt A foreslår Produkt B, da foreslår Produkt B også Produkt A",
+					"Kobler alltid mellom hovedprodukter (ikke varianter)"
+				]
+			},
+			"crossSells": {
+				"title": "Krysssalg-produkter (Tilbehørsprodukter)",
+				"description": "Tilbehørsprodukter fra Quick3 blir krysssalgsforslag i WooCommerce. Dette er enveis-relasjoner.",
+				"items": [
+					"Quick3 'Accessory' koblingstype mappes til WooCommerce krysssalg",
+					"Vises i handlekurv og kassen som komplementære produkter",
+					"Enveis: Produkt A kan foreslå Produkt B, men ikke omvendt",
+					"Kan koble til spesifikke produktvarianter eller hovedprodukter"
+				]
+			},
+			"metadata": {
+				"title": "Andre koblingstyper (Metadata)",
+				"description": "Andre Quick3 koblingstyper lagres som strukturert metadata for fremtidig bruk:",
+				"items": [
+					"Contains, Set, TransferredTo, FractionOf, Batch, EntityFee, BatchWithoutHead",
+					"Lagres i produkt-metafelt: _q3wc_conn_[type] og _q3wc_connections_detail",
+					"Tilgjengelig for egendefinerte integrasjoner og fremtidige funksjoner",
+					"Bevares med full kildesystemdata (priceFactor, quantityFactor, etc.)"
+				]
+			},
+			"automatic": {
+				"title": "Automatisk synkronisering",
+				"description": "Produktkoblinger synkroniseres automatisk hvert 15. minutt via en bakgrunnsjobb. Systemet løser intelligent produktvarianter til hovedprodukter for mersalg, mens spesifikke variantkoblinger bevares for krysssalg. Bare produkter med endrede koblinger oppdateres for å opprettholde ytelsen."
+			},
+			"viewInWooCommerce": {
+				"title": "Visning i WooCommerce",
+				"steps": [
+					"Gå til <strong class=\"font-semibold text-gray-900\">Produkter</strong> i WordPress-admin",
+					"Rediger et produkt som har koblinger",
+					"Rull til <strong class=\"font-semibold text-gray-900\">Koblede produkter</strong>-seksjonen",
+					"Se mersalg i \"Mersalg\"-feltet og krysssalg i \"Krysssalg\"-feltet",
+					"Andre koblingstyper lagres i egendefinerte felt (synlige i \"Egendefinerte felt\"-seksjonen)"
+				]
+			}
+		},
+		"orderSync": {
+			"title": "Synkronisering av ordre",
+			"intro": "Quick3 for WooCommerce holder ordre synkronisert mellom WooCommerce og Quick3 gjennom hele ordrelivssyklusen, fra bestilling til fullføring, returer og kanselleringer.",
+			"newOrders": {
+				"title": "Nye ordre",
+				"description": "Når en kunde fullfører en betaling i WooCommerce, synkroniseres ordren automatisk til Quick3.",
+				"items": [
+					{
+						"label": "Trigger:",
+						"description": "Betalingsleverandør markerer ordren som betalt og setter ordren i \"Processing\" i WooCommerce"
+					},
+					{
+						"label": "Handling:",
+						"description": "En ny ordre opprettes automatisk i Quick3"
+					},
+					{
+						"label": "Data:",
+						"description": "Kundeinfo, produkter, priser og betalingsdetaljer overføres"
+					}
+				]
+			},
+			"shipping": {
+				"title": "Fraktoppdateringer",
+				"description": "Sporingsinformasjon fra Quick3 synkroniseres automatisk tilbake til WooCommerce når du legger til frakt i Quick3.",
+				"items": [
+					{
+						"label": "Fra Quick3 til WooCommerce:",
+						"description": "Sporingsnummer og fraktinformasjon"
+					},
+					{
+						"label": "Kunde:",
+						"description": "Kunden får automatisk beskjed om sporingsinfo"
+					}
+				]
+			},
+			"completed": {
+				"title": "Fullførte ordre",
+				"description": "Når du fakturerer en ordre i Quick3, markeres ordren automatisk som fullført i WooCommerce.",
+				"items": [
+					{
+						"label": "Trigger:",
+						"description": "Du trykker \"Fakturer\" i Quick3"
+					},
+					{
+						"label": "Handling:",
+						"description": "Ordrestatus i WooCommerce oppdateres til \"Fullført\""
+					},
+					{
+						"label": "Kunde:",
+						"description": "Kunden får fullføringsbekreftelse fra WooCommerce"
+					}
+				]
+			},
+			"returns": {
+				"title": "Returer",
+				"description": "Returer må håndteres fra WooCommerce og synkroniseres deretter automatisk til Quick3.",
+				"items": [
+					{
+						"label": "Opprett retur:",
+						"description": "Returer opprettes i WooCommerce"
+					},
+					{
+						"label": "Synkronisering:",
+						"description": "Returen opprettes som en ny ordre i Quick3 med negative beløp"
+					},
+					{
+						"label": "Lagerstyring:",
+						"description": "Lagerbeholdning oppdateres automatisk"
+					}
+				],
+				"tip": "Tips: Start alltid returer fra WooCommerce for å sikre korrekt synkronisering til Quick3."
+			},
+			"cancellation": {
+				"title": "Kansellering av ordre",
+				"description": "Ordre som ikke er fakturert eller har tilhørende plukklister kan kanselleres direkte fra WooCommerce.",
+				"items": [
+					{
+						"label": "Krav:",
+						"description": "Ordren må ikke være fakturert i Quick3"
+					},
+					{
+						"label": "Handling:",
+						"description": "Ordren slettes fra Quick3"
+					},
+					{
+						"label": "Refundering:",
+						"description": "Tilhørende refunderingsordre slettes også"
+					}
+				],
+				"warning": "Viktig: Fakturerte ordre kan ikke kanselleres. Disse må håndteres som returer i stedet."
+			},
+			"limitations": {
+				"title": "Begrensninger",
+				"description": "På grunn av begrensninger i Quick3 API er det noen operasjoner som ikke støttes:",
+				"items": [
+					{
+						"label": "Ordreoppdateringer:",
+						"description": "Eksisterende ordre kan ikke endres etter opprettelse i Quick3"
+					},
+					{
+						"label": "Årsakskoder:",
+						"description": "Quick3 API støtter ikke oppdatering av ordre via API"
+					},
+					{
+						"label": "Løsning:",
+						"description": "Endringer må gjøres manuelt i Quick3"
+					}
+				],
+				"note": "Merk: Hvis du trenger å endre en ordre etter at den er opprettet, må dette gjøres direkte i Quick3. Dette er en begrensning i Quick3 API."
+			}
+		},
+		"jobSystem": {
+			"title": "Jobsystemet",
+			"intro": "Quick3 for WooCommerce bruker et robust bakgrunnsjobsystem for å håndtere synkronisering.",
+			"typesTitle": "Jobtyper",
+			"types": [
+				{
+					"title": "Produktimport",
+					"description": "Henter alle produkter fra Quick3 og oppdaterer WooCommerce-katalogen. Kjøres automatisk basert på innstilt frekvens."
+				},
+				{
+					"title": "Ordresynkronisering",
+					"description": "Henter oppdatert informasjon fra Quick3 per ordre og oppdaterer med sporingsinfo. Kjøres automatisk hvert 15. minutt."
+				}
+			],
+			"monitoringTitle": "Jobbovervåking",
+			"monitoringIntro": "Du kan overvåke synkroniseringsjobber i sanntid:",
+			"monitoringSteps": [
+				"Gå til <strong class=\"font-semibold text-gray-900\">Quick3 for WooCommerce → Jobber</strong>",
+				"Se status for pågående og fullførte jobber",
+				"Klikk på en jobb for å se detaljert logg",
+				"Identifiser og løs eventuelle feil"
+			],
+			"errorTitle": "Håndtering av feil",
+			"errorIntro": "Hvis synkroniseringen feiler:",
+			"errorSteps": [
+				"Jobben markeres med feilstatus",
+				"Feilmelding logges med detaljer",
+				"Pluginen prøver automatisk på nytt ved neste planlagte kjøring",
+				"Du kan manuelt kjøre jobben på nytt fra admin-panelet"
+			],
+			"performanceTitle": "Ytelse og optimalisering",
+			"performanceIntro": "Quick3 for WooCommerce er optimalisert for ytelse:",
+			"performanceItems": [
+				{
+					"label": "Bakgrunnsprosessering:",
+					"description": "Jobber kjøres i bakgrunnen uten å påvirke frontend"
+				},
+				{
+					"label": "Endring-deteksjon:",
+					"description": "Kun endrede produkter oppdateres (hash-basert)"
+				},
+				{
+					"label": "Database-optimalisering:",
+					"description": "Effektive spørringer med indeksering"
+				},
+				{
+					"label": "Bildeoptimalisering:",
+					"description": "Bilder lastes ned asynkront"
+				}
+			]
+		},
+		"troubleshooting": {
+			"title": "Feilsøking",
+			"intro": "Løsninger på vanlige problemer og spørsmål om Quick3 for WooCommerce.",
+			"connection": {
+				"title": "Tilkoblingsproblemer",
+				"invalidToken": {
+					"problem": "Får feilmelding \"Invalid API token\"",
+					"solution": "Løsning:",
+					"steps": [
+						"Dobbeltsjekk at API-token er korrekt kopiert fra Quick3",
+						"Sørg for at det ikke er mellomrom før eller etter token",
+						"Verifiser at token ikke har utløpt",
+						"Generer en ny token hvis nødvendig"
+					]
+				},
+				"cannotConnect": {
+					"problem": "Kan ikke koble til Quick3 API",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk at Quick3 Base URL er korrekt",
+						"Verifiser at serveren din kan nå Quick3 API (ingen brannmur-blokkeringer)",
+						"Test tilkoblingen fra WordPress ved å kjøre en manuell synkronisering",
+						"Sjekk WordPress debug-logg for detaljerte feilmeldinger"
+					]
+				}
+			},
+			"syncIssues": {
+				"title": "Synkroniseringsproblemer",
+				"noSync": {
+					"problem": "Produkter synkroniseres ikke",
+					"solution": "Løsning:",
+					"steps": [
+						"Gå til <strong class=\"font-semibold text-gray-900\">Quick3 for WooCommerce → Jobber</strong> og sjekk jobbstatus",
+						"Se etter feilmeldinger i jobbloggen",
+						"Verifiser at automatisk synkronisering er aktivert",
+						"Sjekk at WordPress cron kjører korrekt",
+						"Prøv å kjøre en manuell synkronisering ved å klikke på \"Ny jobb\""
+					]
+				},
+				"partialSync": {
+					"problem": "Kun noen produkter blir importert",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk om produktet er satt som aktivt i Quick3",
+						"Sjekk om produktet er satt som webaktiv i Quick3",
+						"Sjekk jobbloggen for advarsler om spesifikke produkter",
+						"Verifiser at produktene har gyldig data i Quick3",
+						"Kontroller at produktene har unike SKU-verdier",
+						"Se etter minnegrenser (PHP memory_limit) som kan stoppe store importer"
+					]
+				}
+			},
+			"performance": {
+				"title": "Ytelsesproblemer",
+				"slowSync": {
+					"problem": "Synkronisering tar veldig lang tid",
+					"solution": "Løsning:",
+					"steps": [
+						"Store kataloger (1000+ produkter) tar naturlig lengre tid",
+						"Øk CPU og RAM på serveren",
+						"Sjekk at serveren har nok minne (minst 256MB PHP memory_limit)",
+						"Øk PHP max_execution_time hvis jobber timeout"
+					]
+				},
+				"slowSite": {
+					"problem": "Nettstedet blir saktere under synkronisering",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk serverressurser (CPU, minne, disk I/O). Vurder å øke kapasiteten",
+						"Vurder å redusere synkroniseringsfrekvens",
+						"Kontakt hosting-leverandør hvis problemer vedvarer"
+					]
+				}
+			},
+			"products": {
+				"title": "Produktproblemer",
+				"duplicates": {
+					"problem": "Produkter blir duplisert",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk at produktene har unike SKU-verdier i både Quick3 og WooCommerce",
+						"Ikke endre SKU manuelt i WooCommerce etter første import",
+						"Slett duplikater manuelt og kjør synkronisering på nytt",
+						"Kontakt support hvis problemet fortsetter"
+					]
+				},
+				"noImages": {
+					"problem": "Bilder lastes ikke opp",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk at WordPress har skriverettigheter til uploads-mappen",
+						"Verifiser at bilde-URLer fra Quick3 er tilgjengelige",
+						"Kontroller PHP upload_max_filesize og post_max_size innstillinger",
+						"Se i jobbloggen for spesifikke bildefeil"
+					]
+				},
+				"wrongPrices": {
+					"problem": "Priser er feil",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk at prisene er korrekte i Quick3",
+						"Verifiser MVA/TAX-innstillinger i både Quick3 og WooCommerce",
+						"Kontroller valutainnstillinger",
+						"Kjør en ny synkronisering for å oppdatere priser"
+					]
+				}
+			},
+			"jobs": {
+				"title": "Jobbsystemet",
+				"stuckJobs": {
+					"problem": "Jobber blir sittende fast",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk om jobben faktisk kjører (se jobblogg i admin-panelet)",
+						"Vent minst 15 minutter før du konkluderer med at den har stoppet",
+						"Kontakt support hvis jobben fortsatt står fast"
+					]
+				},
+				"noLogs": {
+					"problem": "Kan ikke se jobblogger",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk at WordPress har skriverettigheter til loggmappen",
+						"Verifiser at logger ikke har blitt slettet automatisk",
+						"Se i WordPress debug.log for systemfeil"
+					]
+				}
+			},
+			"wordpress": {
+				"title": "WordPress-spesifikke problemer",
+				"cronNotRunning": {
+					"problem": "Cron-jobber kjører ikke",
+					"solution": "Løsning:",
+					"steps": [
+						"Sjekk at WordPress cron ikke er deaktivert i wp-config.php",
+						"Kontakt hosting-leverandør for å verifisere at cron fungerer korrekt",
+						"Vurder å sette opp system cron i stedet for WP-Cron"
+					]
+				},
+				"pluginConflicts": {
+					"problem": "Plugin-konflikter",
+					"solution": "Løsning:",
+					"steps": [
+						"Deaktiver andre plugins midlertidig for å identifisere konflikter",
+						"Spesielt cache-plugins kan forstyrre synkronisering",
+						"Rapporter konflikter til support"
+					]
+				}
+			},
+			"debugMode": {
+				"title": "Debug-modus",
+				"description": "For å få mer detaljert informasjon om feil, aktiver WordPress debug-modus:",
+				"code": "// I wp-config.php\ndefine('WP_DEBUG', true);\ndefine('WP_DEBUG_LOG', true);\ndefine('WP_DEBUG_DISPLAY', false);",
+				"logLocation": "Logger vil bli skrevet til <code class=\"text-sm font-mono text-gray-900\">wp-content/debug.log</code>."
+			}
+		},
+		"support": {
+			"title": "Trenger du hjelp?",
+			"intro": "Hvis du fortsatt har problemer etter å ha prøvd løsningene ovenfor, er vi her for å hjelpe. Kontakt oss direkte eller kom i gang med oppsett ved å følge vår veiledning.",
+			"getStarted": {
+				"title": "Kom i gang →",
+				"description": "Følg vår steg-for-steg veiledning for å sette opp Quick3 for WooCommerce"
+			},
+			"contact": {
+				"title": "Kontakt oss →",
+				"description": "Send oss en melding for support, assistanse eller spørsmål"
+			},
+			"tip": "Tips: Jo mer informasjon du gir når du kontakter oss, jo raskere kan vi hjelpe deg med å løse problemet."
+		}
+	},
+	"meta": {
+		"home": {
+			"title": "Quick3 for WooCommerce - Automatisk synkronisering mellom Quick3 ERP og WooCommerce",
+			"description": "Automatisk synkronisering mellom Quick3 ERP og WooCommerce. Produkter, priser, lager og ordre synkroniseres uten feil. Norsk WordPress-plugin."
+		},
+		"getStarted": {
+			"title": "Kom i gang - Quick3 for WooCommerce",
+			"description": "Kom i gang med Quick3 for WooCommerce. Installer plugin-en, konfigurer API-token, og start synkronisering mellom Quick3 ERP og WooCommerce."
+		},
+		"docs": {
+			"title": "Dokumentasjon - Quick3 for WooCommerce",
+			"description": "Dokumentasjon for Quick3 for WooCommerce. Lær hvordan du konfigurerer og bruker plugin-en for å synkronisere produkter, priser og lager mellom Quick3 ERP og WooCommerce."
+		},
+		"privacy": {
+			"title": "Personvernerklæring - Quick3 for WooCommerce",
+			"description": "Personvernerklæring for Quick3 for WooCommerce."
+		}
+	}
+}

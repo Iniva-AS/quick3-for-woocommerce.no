@@ -1,0 +1,261 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts
+		.filter((post) => !post.data.draft)
+		.map((post) => ({
+			params: { slug: post.slug },
+			props: { post },
+		}));
+}
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const locale = 'no';
+
+// Format date helper
+function formatDate(date: Date): string {
+	return new Intl.DateTimeFormat('no-NO', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	}).format(date);
+}
+
+const publishedDate = formatDate(post.data.pubDate);
+const updatedDate = post.data.updatedDate ? formatDate(post.data.updatedDate) : null;
+---
+
+<BaseLayout
+	locale={locale}
+	title={`${post.data.title} - Quick3 for WooCommerce`}
+	description={post.data.description}
+	type="article"
+	image={post.data.image}
+>
+	<Header locale={locale} currentPath={Astro.url.pathname} />
+
+	<article class="bg-white px-6 py-32 lg:px-8">
+		<div class="mx-auto max-w-3xl text-base/7 text-gray-700">
+			<!-- Breadcrumb -->
+			<nav class="mb-8 flex" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-2">
+					<li class="inline-flex items-center">
+						<a href="/no" class="text-sm font-medium text-gray-600 hover:text-gray-900">
+							Hjem
+						</a>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="size-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+							</svg>
+							<a href="/no/blogg" class="ml-1 text-sm font-medium text-gray-600 hover:text-gray-900 md:ml-2">
+								Blogg
+							</a>
+						</div>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<svg class="size-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+							</svg>
+							<span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">
+								{post.data.title}
+							</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+
+			<h1 class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+				{post.data.title}
+			</h1>
+
+			<div class="mt-6 flex items-center gap-x-4 text-sm text-gray-600">
+				<time datetime={post.data.pubDate.toISOString()}>
+					Publisert {publishedDate}
+				</time>
+				{updatedDate && (
+					<>
+						<span aria-hidden="true">·</span>
+						<time datetime={post.data.updatedDate?.toISOString()}>
+							Oppdatert {updatedDate}
+						</time>
+					</>
+				)}
+			</div>
+
+			<figure class="mt-10">
+				<img
+					alt={post.data.imageAlt}
+					src={post.data.image}
+					class="aspect-video rounded-xl bg-gray-50 object-cover"
+				/>
+			</figure>
+
+			<div class="mt-10 max-w-2xl prose prose-gray prose-lg">
+				<Content />
+			</div>
+
+			<!-- Author section -->
+			<div class="mt-16 max-w-2xl border-t border-gray-900/5 pt-8">
+				<div class="flex items-center gap-x-4">
+					<img alt="" src={post.data.authorImage} class="size-12 rounded-full bg-gray-50" />
+					<div class="text-sm/6">
+						<p class="font-semibold text-gray-900">
+							{post.data.authorName}
+						</p>
+						<p class="text-gray-600">{post.data.authorRole}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<!-- Article Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		"headline": post.data.title,
+		"description": post.data.description,
+		"image": post.data.image,
+		"datePublished": post.data.pubDate.toISOString(),
+		"dateModified": (post.data.updatedDate || post.data.pubDate).toISOString(),
+		"author": {
+			"@type": "Person",
+			"name": post.data.authorName,
+			"jobTitle": post.data.authorRole
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iniva AS",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://quick3-for-woocommerce.no/iniva-logo.png"
+			}
+		}
+	})} />
+
+	<Footer locale={locale} />
+</BaseLayout>
+
+<style is:global>
+	/* Tailwind Prose customization for blog content */
+	.prose {
+		color: rgb(55 65 81);
+	}
+
+	.prose h2 {
+		font-size: 1.875rem;
+		line-height: 2.25rem;
+		font-weight: 600;
+		margin-top: 4rem;
+		margin-bottom: 1.5rem;
+		color: rgb(17 24 39);
+	}
+
+	.prose h3 {
+		font-size: 1.5rem;
+		line-height: 2rem;
+		font-weight: 600;
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+		color: rgb(17 24 39);
+	}
+
+	.prose p {
+		margin-top: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.prose ul, .prose ol {
+		margin-top: 1.5rem;
+		margin-bottom: 1.5rem;
+		padding-left: 1.625rem;
+	}
+
+	.prose ul {
+		list-style-type: disc;
+	}
+
+	.prose ol {
+		list-style-type: decimal;
+	}
+
+	.prose li {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.prose strong {
+		font-weight: 600;
+		color: rgb(17 24 39);
+	}
+
+	.prose a {
+		color: rgb(79 70 229);
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.prose a:hover {
+		color: rgb(67 56 202);
+	}
+
+	.prose blockquote {
+		font-weight: 600;
+		font-style: normal;
+		color: rgb(17 24 39);
+		border-left-width: 0.25rem;
+		border-left-color: rgb(79 70 229);
+		quotes: none;
+		margin-top: 2.5rem;
+		margin-bottom: 2.5rem;
+		padding-left: 2.25rem;
+	}
+
+	.prose code {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: rgb(17 24 39);
+		background-color: rgb(249 250 251);
+		padding: 0.125rem 0.375rem;
+		border-radius: 0.25rem;
+	}
+
+	.prose pre {
+		background-color: rgb(17 24 39);
+		color: rgb(229 231 235);
+		overflow-x: auto;
+		font-size: 0.875rem;
+		line-height: 1.7142857;
+		margin-top: 1.7142857em;
+		margin-bottom: 1.7142857em;
+		border-radius: 0.375rem;
+		padding: 1.142857em;
+	}
+
+	.prose pre code {
+		background-color: transparent;
+		color: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		padding: 0;
+	}
+
+	.prose img {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		border-radius: 0.5rem;
+	}
+</style>

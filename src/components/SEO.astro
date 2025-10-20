@@ -1,0 +1,60 @@
+---
+import { type Locale } from '../i18n/utils';
+
+interface Props {
+	title: string;
+	description: string;
+	locale?: Locale;
+	type?: 'website' | 'article';
+	image?: string;
+	noindex?: boolean;
+	canonical?: string;
+}
+
+const {
+	title,
+	description,
+	locale = 'no',
+	type = 'website',
+	image = '/og-image.png',
+	noindex = false,
+	canonical
+} = Astro.props;
+
+const siteUrl = 'https://quick3-for-woocommerce.no';
+const currentUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(image, siteUrl).href;
+
+// Map locale to OG locale format
+const ogLocale = locale === 'no' ? 'nb_NO' : 'en_GB';
+const ogLocaleAlternate = locale === 'no' ? 'en_GB' : 'nb_NO';
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Canonical URL -->
+<link rel="canonical" href={currentUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:locale:alternate" content={ogLocaleAlternate} />
+<meta property="og:site_name" content="Quick3 for WooCommerce" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={currentUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Additional Meta Tags -->
+<meta name="theme-color" content="#2563eb" />

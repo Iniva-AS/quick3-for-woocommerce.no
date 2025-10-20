@@ -1,0 +1,61 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { type Locale } from '../i18n/utils';
+
+interface Props {
+	locale: Locale;
+	title: string;
+	description?: string;
+	currentPath: string;
+}
+
+const { locale, title, description, currentPath } = Astro.props;
+
+// TODO: These should be translated
+const navItems = [
+	{ href: `/${locale}/docs`, label: 'Dokumentasjon' },
+	{ href: `/${locale}/docs#overview`, label: 'Oversikt' },
+	{ href: `/${locale}/docs#sync`, label: 'Synkronisering' },
+	{ href: `/${locale}/docs#order-sync`, label: 'Synkronisering av ordre' },
+	{ href: `/${locale}/docs#job-system`, label: 'Jobsystemet' },
+	{ href: `/${locale}/docs#troubleshooting`, label: 'Feilsøking' },
+	{ href: `/${locale}/docs#support`, label: 'Support' },
+];
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+	<Header locale={locale} currentPath={currentPath} />
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<div class="flex gap-16">
+			<!-- Sidebar Navigation -->
+			<aside class="hidden md:block w-64 flex-shrink-0">
+				<nav class="sticky top-24">
+					<h2 class="text-sm font-semibold text-gray-900 mb-4">Dokumentasjon</h2>
+					<ul class="space-y-2">
+						{navItems.map((item) => (
+							<li>
+								<a
+									href={item.href}
+									class="block px-3 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
+									class:list={[
+										Astro.url.pathname === item.href && 'bg-indigo-50 text-indigo-600 font-medium'
+									]}
+								>
+									{item.label}
+								</a>
+							</li>
+						))}
+					</ul>
+				</nav>
+			</aside>
+
+			<!-- Main Content -->
+			<main class="flex-1 max-w-3xl pt-16">
+				<slot />
+			</main>
+		</div>
+	</div>
+	<Footer locale={locale} />
+</BaseLayout>

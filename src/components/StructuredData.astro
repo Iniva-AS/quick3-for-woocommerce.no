@@ -1,0 +1,60 @@
+---
+interface Props {
+	type: 'organization' | 'software' | 'breadcrumb' | 'faq';
+	data?: any;
+}
+
+const { type, data } = Astro.props;
+const siteUrl = 'https://quick3-for-woocommerce.no';
+
+let schema = {};
+
+switch (type) {
+	case 'organization':
+		schema = {
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "Iniva AS",
+			"url": "https://iniva.no",
+			"logo": `${siteUrl}/iniva-logo.png`,
+			"sameAs": [
+				"https://github.com/iniva"
+			]
+		};
+		break;
+
+	case 'software':
+		schema = {
+			"@context": "https://schema.org",
+			"@type": "SoftwareApplication",
+			"name": "Quick3 for WooCommerce",
+			"applicationCategory": "BusinessApplication",
+			"operatingSystem": "WordPress",
+			"offers": {
+				"@type": "Offer",
+				"price": "0",
+				"priceCurrency": "NOK"
+			},
+			"description": "Automatisk synkronisering mellom Quick3 ERP og WooCommerce",
+			"softwareVersion": "1.0",
+			"author": {
+				"@type": "Organization",
+				"name": "Iniva AS",
+				"url": "https://iniva.no"
+			},
+			"url": siteUrl,
+			"downloadUrl": "https://wordpress.org/plugins/quick3-for-woocommerce/"
+		};
+		break;
+
+	case 'breadcrumb':
+		schema = data || {};
+		break;
+
+	case 'faq':
+		schema = data || {};
+		break;
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

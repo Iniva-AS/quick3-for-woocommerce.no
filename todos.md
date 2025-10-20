@@ -1,0 +1,1 @@
+- [ ] Make it more obvious that this is a wp plugin

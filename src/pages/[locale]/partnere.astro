@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PartnerCard from '../../components/PartnerCard.astro';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+export async function getStaticPaths() {
+	return [
+		{ params: { locale: 'no' } },
+		{ params: { locale: 'en' } },
+	];
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+
+// Fetch all partners
+const allPartners = await getCollection('partners');
+
+// Filter out drafts, prioritize featured partners
+const partners = allPartners
+	.filter((partner) => !partner.data.draft)
+	.sort((a, b) => {
+		// Featured partners first
+		if (a.data.featured && !b.data.featured) return -1;
+		if (!a.data.featured && b.data.featured) return 1;
+		// Then alphabetically by title
+		return a.data.title.localeCompare(b.data.title);
+	});
+---
+
+<BaseLayout
+	locale={locale}
+	title={t.partners.meta.title}
+	description={t.partners.meta.description}
+>
+	<Header locale={locale} currentPath={Astro.url.pathname} />
+
+	<div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
+		<div class="mx-auto max-w-2xl text-center">
+			<p class="text-base/7 font-semibold text-indigo-600">
+				{t.partners.subtitle}
+			</p>
+			<h1 class="mt-2 text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+				{t.partners.title}
+			</h1>
+			<p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
+				{t.partners.description}
+			</p>
+		</div>
+	</div>
+
+	<div class="bg-white pb-24 sm:pb-32">
+		<div class="mx-auto max-w-7xl px-6 lg:px-8">
+			<!-- Partners Grid -->
+			{partners.length === 0 ? (
+				<div class="text-center">
+					<p class="text-gray-500">{t.partners.noPartnersYet}</p>
+				</div>
+			) : (
+				<div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+					{partners.map((partner) => (
+						<PartnerCard partner={partner} locale={locale} />
+					))}
+				</div>
+			)}
+		</div>
+	</div>
+
+	<!-- Partner CTA Section -->
+	<div class="bg-white">
+		<div class="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+			<div class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
+				<h2 class="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
+					{t.partners.cta.title}
+				</h2>
+				<p class="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-300">
+					{t.partners.cta.description}
+				</p>
+				<div class="mt-10 flex items-center justify-center gap-x-6">
+					<a
+						href="mailto:hello@iniva.no?subject=Partnerskap - Quick3 for WooCommerce"
+						class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+					>
+						{t.partners.cta.primaryButton}
+					</a>
+				</div>
+				<svg viewBox="0 0 1024 1024" aria-hidden="true" class="absolute top-1/2 left-1/2 -z-10 size-256 -translate-x-1/2 mask-[radial-gradient(closest-side,white,transparent)]">
+					<circle r="512" cx="512" cy="512" fill="url(#827591b1-ce8c-4110-b064-7cb85a0b1217)" fill-opacity="0.7" />
+					<defs>
+						<radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217">
+							<stop stop-color="#7775D6" />
+							<stop offset="1" stop-color="#E935C1" />
+						</radialGradient>
+					</defs>
+				</svg>
+			</div>
+		</div>
+	</div>
+
+	<Footer locale={locale} />
+</BaseLayout>

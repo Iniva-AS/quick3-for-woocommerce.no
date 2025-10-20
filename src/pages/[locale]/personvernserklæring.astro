@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+export async function getStaticPaths() {
+	return [
+		{ params: { locale: 'no' } },
+		{ params: { locale: 'en' } },
+	];
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+
+const copy = {
+	en: {
+		intro:
+			"We operate the Quick3 for WooCommerce marketing site and keep data collection to a minimum. Everything we store helps us answer enquiries and keep the site reliable.",
+		dataHeading: "What we collect",
+		dataPoints: [
+			"Details you submit through contact forms (name, email, company, message).",
+			"Support requests you send to our email inbox.",
+			"Basic aggregated traffic and error logs from our hosting provider."
+		],
+		usageHeading: "How we use data",
+		usageBody:
+			"We respond to your requests, maintain system security, and analyse anonymous usage to spot bugs. We never sell personal data or share it beyond trusted hosting and email partners required to run this service.",
+		cookiesHeading: "Cookies and analytics",
+		cookiesBody:
+			"We use cookies and similar technologies to understand how visitors use our site and to improve our services. With your consent, we use:",
+		cookiesPoints: [
+			"Google Analytics (GA4) - Analyzes website traffic and user behavior to help us improve the site experience.",
+			"Google Ads - Measures the effectiveness of our advertising campaigns and tracks conversions from ads.",
+			"Google Tag Manager - Manages tracking tags in one place."
+		],
+		cookiesFooter:
+			"You can manage your cookie preferences at any time using the cookie banner that appears when you first visit the site. We use Google Consent Mode v2, which means that even if you decline cookies, we can still measure aggregated, privacy-safe statistics without identifying you personally. Data collected through Google services may be transferred to the United States. Google LLC participates in the EU-U.S. Data Privacy Framework.",
+		retentionHeading: "Retention and deletion",
+		retentionBody:
+			"We store contact records for up to 12 months or until the conversation is resolved. Request deletion at any time and we will remove or anonymise your data unless law requires us to keep it.",
+		rightsHeading: "Your choices",
+		rightsPoints: [
+			"Ask for a copy of the data we hold about you.",
+			"Request corrections if something is inaccurate.",
+			"Withdraw consent or ask us to delete stored details."
+		],
+		contactHeading: "Need help?",
+		contactBody: "Email us and we will respond within two business days.",
+		contactEmail: "hello@iniva.no"
+	},
+	no: {
+		intro:
+			"Vi drifter markedsføringsnettsiden for Quick3 for WooCommerce og samler kun inn data som er nødvendig for å besvare henvendelser og sikre stabil drift.",
+		dataHeading: "Hva vi samler inn",
+		dataPoints: [
+			"Opplysninger du sender i kontaktskjemaet (navn, e-post, selskap, melding).",
+			"Supporthenvendelser du sender til oss på e-post.",
+			"Aggregert trafikkstatistikk og feillogger fra driftsmiljøet vårt."
+		],
+		usageHeading: "Hvordan vi bruker data",
+		usageBody:
+			"Vi svarer på henvendelser, forbedrer sikkerheten og analyserer anonymisert bruk for å oppdage feil. Vi selger aldri persondata og deler kun med pålitelige drifts- og e-postleverandører som er nødvendige for tjenesten.",
+		cookiesHeading: "Informasjonskapsler og analyse",
+		cookiesBody:
+			"Vi bruker informasjonskapsler og lignende teknologier for å forstå hvordan besøkende bruker nettstedet vårt og for å forbedre tjenestene våre. Med ditt samtykke bruker vi:",
+		cookiesPoints: [
+			"Google Analytics (GA4) - Analyserer nettstedstrafikk og brukeratferd for å hjelpe oss med å forbedre brukeropplevelsen.",
+			"Google Ads - Måler effektiviteten av våre annonsekampanjer og sporer konverteringer fra annonser.",
+			"Google Tag Manager - Administrerer sporingskoder på ett sted."
+		],
+		cookiesFooter:
+			"Du kan administrere dine informasjonskapselpreferanser når som helst ved å bruke informasjonskapsel-banneret som vises når du først besøker nettstedet. Vi bruker Google Consent Mode v2, som betyr at selv om du avviser informasjonskapsler, kan vi fortsatt måle aggregert, personvernssikker statistikk uten å identifisere deg personlig. Data samlet inn gjennom Google-tjenester kan overføres til USA. Google LLC deltar i EU-U.S. Data Privacy Framework.",
+		retentionHeading: "Lagring og sletting",
+		retentionBody:
+			"Vi lagrer kontaktlogg i inntil 12 måneder eller til dialogen er avsluttet. Du kan når som helst be oss slette eller anonymisere opplysningene dine med mindre lovpålagte krav sier noe annet.",
+		rightsHeading: "Dine valg",
+		rightsPoints: [
+			"Be om innsyn i hvilke data vi lagrer om deg.",
+			"Be oss korrigere opplysninger som ikke stemmer.",
+			"Trekke tilbake samtykke eller be om sletting av lagrede data."
+		],
+		contactHeading: "Trenger du hjelp?",
+		contactBody: "Send oss en e-post så svarer vi innen to arbeidsdager.",
+		contactEmail: "hello@iniva.no"
+	}
+} satisfies Record<Locale, {
+	intro: string;
+	dataHeading: string;
+	dataPoints: string[];
+	usageHeading: string;
+	usageBody: string;
+	cookiesHeading: string;
+	cookiesBody: string;
+	cookiesPoints: string[];
+	cookiesFooter: string;
+	retentionHeading: string;
+	retentionBody: string;
+	rightsHeading: string;
+	rightsPoints: string[];
+	contactHeading: string;
+	contactBody: string;
+	contactEmail: string;
+}>;
+
+const content = copy[locale];
+---
+
+<BaseLayout locale={locale} title={t.meta.privacy.title} description={t.meta.privacy.description}>
+	<Header locale={locale} currentPath={Astro.url.pathname} />
+
+	<article class="bg-white px-6 py-24 sm:py-32 lg:px-8">
+		<div class="mx-auto max-w-4xl">
+			<!-- Header -->
+			<div>
+				<p class="text-sm font-semibold uppercase tracking-wide text-indigo-600">
+					{locale === 'en' ? 'Privacy Policy' : 'Personvernerklæring'}
+				</p>
+				<h1 class="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+					{locale === 'en' ? 'How we handle your data' : 'Slik behandler vi dine data'}
+				</h1>
+				<p class="mt-6 text-lg leading-8 text-gray-600">
+					{content.intro}
+				</p>
+			</div>
+
+			<!-- Content Sections -->
+			<div class="mt-16 space-y-16">
+				<!-- What we collect -->
+				<section>
+					<h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						{content.dataHeading}
+					</h2>
+					<ul class="mt-6 space-y-4">
+						{content.dataPoints.map((point) => (
+							<li class="flex gap-x-3">
+								<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+								</svg>
+								<span class="text-base leading-7 text-gray-600">{point}</span>
+							</li>
+						))}
+					</ul>
+				</section>
+
+				<!-- How we use data -->
+				<section>
+					<h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						{content.usageHeading}
+					</h2>
+					<p class="mt-6 text-base leading-7 text-gray-600">
+						{content.usageBody}
+					</p>
+				</section>
+
+				<!-- Cookies and Analytics -->
+				<section>
+					<h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						{content.cookiesHeading}
+					</h2>
+					<p class="mt-6 text-base leading-7 text-gray-600">
+						{content.cookiesBody}
+					</p>
+					<ul class="mt-6 space-y-4">
+						{content.cookiesPoints.map((point) => (
+							<li class="flex gap-x-3">
+								<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+								</svg>
+								<span class="text-base leading-7 text-gray-600">{point}</span>
+							</li>
+						))}
+					</ul>
+					<p class="mt-6 text-base leading-7 text-gray-600">
+						{content.cookiesFooter}
+					</p>
+				</section>
+
+				<!-- Retention and deletion -->
+				<section>
+					<h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						{content.retentionHeading}
+					</h2>
+					<p class="mt-6 text-base leading-7 text-gray-600">
+						{content.retentionBody}
+					</p>
+				</section>
+
+				<!-- Your rights -->
+				<section>
+					<h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						{content.rightsHeading}
+					</h2>
+					<ul class="mt-6 space-y-4">
+						{content.rightsPoints.map((point) => (
+							<li class="flex gap-x-3">
+								<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+								</svg>
+								<span class="text-base leading-7 text-gray-600">{point}</span>
+							</li>
+						))}
+					</ul>
+				</section>
+
+				<!-- Contact -->
+				<section class="rounded-2xl bg-gray-50 p-8 sm:p-10">
+					<h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						{content.contactHeading}
+					</h2>
+					<p class="mt-4 text-base leading-7 text-gray-600">
+						{content.contactBody}
+					</p>
+					<a
+						href={`mailto:${content.contactEmail}`}
+						class="mt-6 inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+					>
+						<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+						</svg>
+						{content.contactEmail}
+					</a>
+				</section>
+
+				<!-- Last updated -->
+				<div class="border-t border-gray-200 pt-8">
+					<p class="text-sm text-gray-500 text-center">
+						{locale === 'en' ? 'Last updated: January 2025' : 'Sist oppdatert: Januar 2025'}
+					</p>
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<Footer locale={locale} />
+</BaseLayout>
