@@ -1,3 +1,3 @@
-- [ ] Make it more obvious that this is a wp plugin
+- [/] Make it more obvious that this is a wp plugin
 - [ ] More focus on support
 - [ ] Make videos showing the integration. Should have quick3 test env for demo tho
