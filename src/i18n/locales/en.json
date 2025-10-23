@@ -1,856 +1,849 @@
 {
-	"nav": {
-		"home": "Home",
-		"getStarted": "Get Started",
-		"docs": "Documentation",
-		"partners": "Partners",
-		"wordpressOrg": "WordPress.org",
-		"openMenu": "Open main menu",
-		"closeMenu": "Close menu"
-	},
-	"hero": {
-		"title": "Give your customers an online store they love – keep the Quick3 you trust",
-		"subtitle": "Install the WordPress plugin that connects WooCommerce and Quick3 automatically. Increase sales and conversions with seamless ERP integration.",
-		"description": "Combine the strengths: Let Quick3 handle accounting, inventory, and logistics. Let WooCommerce drive sales with professional design, modern checkout, and seamless user experience.",
-		"ctaPrimary": "Get started yourself",
-		"ctaPrimaryPartner": "Get setup help",
-		"ctaSecondary": "Read documentation",
-		"ctaSecondaryArrow": "→"
-	},
-	"features": {
-		"heading": "Automate everything",
-		"title": "Everything you need for seamless synchronization",
-		"description": "Quick3 for WooCommerce makes it easy to keep products and inventory synchronized between Quick3 ERP and WooCommerce. Robust background processing handles large catalogs without issues.",
-		"productSync": {
-			"name": "Automatic product synchronization",
-			"description": "Import and update products from Quick3 to WooCommerce automatically. Product information, images, prices, and variants are always kept up to date – without manual work."
-		},
-		"orderSync": {
-			"name": "Real-time order synchronization",
-			"description": "Orders from WooCommerce are instantly transferred to Quick3 with complete customer data and payment information. No delays, no manual intervention."
-		},
-		"multiWarehouse": {
-			"name": "Multi-warehouse management",
-			"description": "Keep inventory updated across all locations. Customers can see availability per warehouse directly in the online store – perfect for physical stores with multiple locations."
-		},
-		"smartPricing": {
-			"name": "Intelligent pricing",
-			"description": "Advanced pricing system with support for regular price, sale prices, time-based campaigns, volume discounts, and customer price lists. Everything synchronizes automatically."
-		},
-		"backgroundProcessing": {
-			"name": "Reliable background processing",
-			"description": "Robust job system handles large catalogs without problems. Processes run in the background without affecting store performance, with automatic error handling and self-healing functions."
-		},
-		"wordpressNative": {
-			"name": "WordPress-native plugin",
-			"description": "Built with WordPress and WooCommerce standards. Follows best practices for performance, security, and maintenance. Full support for WooCommerce hooks and filters for developers."
-		}
-	},
-	"faq": {
-		"title": "Frequently Asked Questions",
-		"items": [
-			{
-				"question": "Can I get help setting up the plugin?",
-				"answer": "Yes! Our <a href=\"/en/partnere\" class=\"text-indigo-600 hover:text-indigo-500 underline\">partners</a> can help you with professional setup and support."
-			},
-			{
-				"question": "What is Quick3 for WooCommerce?",
-				"answer": "Quick3 for WooCommerce is a WordPress plugin that automatically synchronizes products, prices, inventory, orders, and customers between Quick3 ERP and your WooCommerce store. Everything runs in the background, keeping your online store updated with the Quick3 system without manual intervention."
-			},
-			{
-				"question": "What are the system requirements?",
-				"answer": "The plugin requires: WordPress 6.0 or newer, WooCommerce 7.0 or newer, PHP 8.1 or newer, WP-CLI installed on the server, and a valid Quick3 API token. We strongly recommend a VPS with multiple CPU cores rather than standard web hosting, as synchronization requires processing power for data transformation and product matching."
-			},
-			{
-				"question": "How do I get a Quick3 API token?",
-				"answer": "You can get the API token from your Quick3 account. Once you have it, add it to your WordPress configuration by defining QUICK3_TOKEN in your wp-config.php file: define('QUICK3_TOKEN', 'your-api-token-here'); Read the \"Get Started\" guide for more information about this process. The plugin displays configuration status on the Quick3 Settings page."
-			},
-			{
-				"question": "How often is data synchronized between Quick3 and WooCommerce?",
-				"answer": "Synchronization frequency depends on your subscription: Free (manual synchronization only), Business (every 30 minutes), Enterprise (every 15 minutes). You can configure this under WP Admin > Quick3 Settings > Synchronization Settings."
-			},
-			{
-				"question": "What data is synchronized?",
-				"answer": "The plugin synchronizes: products and product variants, product names, descriptions and attributes, regular prices and sale prices (including time-based campaigns), stock levels and stock status, product images, orders (from WooCommerce to Quick3), and customer information."
-			},
-			{
-				"question": "What are the product limits for each plan?",
-				"answer": "Free: Up to 50 products, Business: Up to 10,000 products, Enterprise: Unlimited products. The plugin displays your current usage and limits on the Quick3 Settings page with a visual progress bar."
-			},
-			{
-				"question": "Does the plugin work with Quick3's API limitations?",
-				"answer": "Yes, the plugin is designed to work within Quick3's strict API limitations. Instead of making separate API calls for each inventory update, the plugin fetches all products periodically (based on your subscription). This stays well within API limits while keeping your inventory synchronized."
-			},
-			{
-				"question": "What happens to my existing WooCommerce products?",
-				"answer": "The plugin does not delete existing WooCommerce products. It creates a link between Quick3 products and WooCommerce products using SKU and metadata. If a product exists, it is updated. If no match is found, a new product is created. Existing products not from Quick3 remain untouched."
-			},
-			{
-				"question": "How do I troubleshoot if products are not synchronizing?",
-				"answer": "Check these common issues first: Verify that the Quick3 API token is correctly configured in Quick3 Settings, check that WordPress cron is working properly, view job status under WP Admin > Jobs to check if any jobs failed, check job logs for specific error messages, and ensure you haven't reached the product limit for your subscription."
-			},
-			{
-				"question": "Can I trigger a synchronization manually instead of waiting for automatic sync?",
-				"answer": "Yes! You can trigger a product synchronization manually at any time from WP Admin > Quick3 for WooCommerce > Jobs. Click \"New job\" and select the job you want to run. This is useful for testing the connection or immediately updating after changes in Quick3. Quick3's API limitations still apply, but the plugin has built-in protection that prevents you from exceeding these limits."
-			}
-		]
-	},
-	"pricing": {
-		"heading": "Pricing",
-		"title": "Pricing",
-		"description": "Choose a pricing plan that fits your needs. All plans include automatic synchronization and reliable background processing.",
-		"frequency": {
-			"monthly": "Monthly",
-			"annually": "Annually"
-		},
-		"perMonth": "/month",
-		"perYear": "/year",
-		"mostPopular": "Most popular",
-		"choosePlan": "Choose plan",
-		"getFreeStart": "Get started for free",
-		"tiers": {
-			"free": {
-				"name": "Free",
-				"description": "Get started with basic synchronization for small catalogs.",
-				"features": [
-					"No support",
-					"50 products",
-					"1 day log retention",
-					"Product synchronization every hour"
-				]
-			},
-			"business": {
-				"name": "Business",
-				"description": "For growing businesses with active product management and support.",
-				"features": [
-					"Email support",
-					"10,000 products",
-					"30 days log retention",
-					"Product synchronization every 30 minutes"
-				]
-			},
-			"enterprise": {
-				"name": "Enterprise",
-				"description": "Premium solution with unlimited capacity and priority support.",
-				"features": [
-					"Priority email support",
-					"Unlimited products",
-					"Unlimited log retention",
-					"Product synchronization every 15 minutes"
-				]
-			}
-		}
-	},
-	"contact": {
-		"title": "Contact Us",
-		"description": "Get help with existing installation or setting up a new one.",
-		"form": {
-			"name": "Name",
-			"company": "Company",
-			"email": "Email",
-			"phone": "Phone number:",
-			"message": "Message",
-			"submit": "Send message",
-			"sending": "Sending...",
-			"privacyText": "By checking this, you agree to our",
-			"privacyLink": "privacy policy",
-			"successMessage": "Thank you! Your message has been sent successfully.",
-			"errorMessage": "Failed to send message. Please try again.",
-			"configError": "Configuration error. Please contact support."
-		}
-	},
-	"partners": {
-		"title": "Our Partners",
-		"subtitle": "Get professional help with setup",
-		"description": "Our partners are experienced professionals who can help you get started, set up the integration, and provide ongoing support.",
-		"learnMore": "Learn more",
-		"viewAll": "View all partners",
-		"backToPartners": "← Back to partners",
-		"contactPartner": "Contact partner",
-		"services": "Services",
-		"location": "Location",
-		"website": "Visit website",
-		"email": "Send email",
-		"phone": "Call us",
-		"noPartnersYet": "We're adding partners regularly. Check back soon!",
-		"cta": {
-			"title": "Become an Implementation Partner",
-			"description": "Are you a developer or agency working with WooCommerce and ERP integrations? Become an official Quick3 for WooCommerce partner and gain access to a growing market of customers who need professional help with setup, customizations, and maintenance.",
-			"primaryButton": "Apply for partnership",
-			"secondaryButton": "Learn about our program"
-		},
-		"meta": {
-			"title": "Partners - Quick3 for WooCommerce",
-			"description": "Find professional partners who can help you with setup and operations of Quick3 for WooCommerce."
-		}
-	},
-	"footer": {
-		"copyright": "Iniva AS. Quick3 for WooCommerce is a product by Iniva.",
-		"privacy": "Privacy Policy"
-	},
-	"getStarted": {
-		"tagline": "Quick3 for WooCommerce",
-		"title": "Get started in under 10 minutes",
-		"intro": "Follow this simple guide to connect Quick3 ERP to WooCommerce. With 7 easy steps, you'll have automatic synchronization of products, prices, orders, and inventory.",
-		"downloadSection": {
-			"title": "Download plugin",
-			"description": "Get started for free by downloading the Quick3 for WooCommerce plugin. No credit card required.",
-			"buttonText": "Download free"
-		},
-		"step1": {
-			"title": "1. Install the plugin",
-			"description": "Find and install Quick3 for WooCommerce from the WordPress plugin directory. The process takes just a few minutes and requires no technical expertise.",
-			"steps": [
-				"<strong class=\"font-semibold text-gray-900\">Log in to WordPress</strong> and go to the admin panel where you manage your site.",
-				"<strong class=\"font-semibold text-gray-900\">Plugins → Add New</strong> to find and install new WordPress plugins.",
-				"<strong class=\"font-semibold text-gray-900\">Search for \"Quick3 for WooCommerce\"</strong> in the plugin directory and click Install Now.",
-				"<strong class=\"font-semibold text-gray-900\">Activate the plugin</strong> after installation to get started."
-			],
-			"warning": "Important: Make sure WooCommerce is already installed and activated before installing Quick3 for WooCommerce."
-		},
-		"step2": {
-			"title": "2. Activate license",
-			"description": "Activate or purchase a Freemius license to access all features. The plugin offers both free and paid options depending on your needs.",
-			"steps": [
-				"<strong class=\"font-semibold text-gray-900\">Follow the Freemius instructions</strong> displayed after activating the plugin.",
-				"<strong class=\"font-semibold text-gray-900\">Choose license type</strong> – free for testing or paid for production with priority support.",
-				"<strong class=\"font-semibold text-gray-900\">Business use?</strong> Paid license is recommended for production environments with dedicated support."
-			]
-		},
-		"step3": {
-			"title": "3. Get Quick3 API token",
-			"description": "To connect to Quick3 ERP, you need an API token. This is generated directly from your Quick3 account and gives the plugin secure access to product data.",
-			"steps": [
-				"<strong class=\"font-semibold text-gray-900\">Log in to Quick3</strong> with your company account.",
-				"<strong class=\"font-semibold text-gray-900\">Go to Home → Client Settings → Security</strong> to manage API access.",
-				"<strong class=\"font-semibold text-gray-900\">Generate new token</strong> and select ApiV2 as the API type. Remember to mark it as active.",
-				"<strong class=\"font-semibold text-gray-900\">Copy the API key</strong> and have it ready for the next step."
-			],
-			"warning": "If you don't have access to API settings, contact Quick3 support to activate API access on your account. We use V2 API (BETA)."
-		},
-		"step4": {
-			"title": "4. Configure Quick3 connection",
-			"description": "The API key should be added to the wp-config.php file as this is more secure than adding it via the admin panel.",
-			"substep1": {
-				"title": "Step 1: wp-config.php",
-				"description": "Edit <code class=\"text-sm font-mono text-gray-900\">wp-config.php</code> and add the following lines above <code class=\"text-sm font-mono text-gray-900\">/* That's all, stop editing! */</code>:",
-				"code": "// Quick3 API Configuration\ndefine('QUICK3_TOKEN', 'your-api-token-here');"
-			},
-			"substep2": {
-				"title": "Step 2: Via admin panel",
-				"steps": [
-					"<strong class=\"font-semibold text-gray-900\">Go to Quick3 for WooCommerce → Settings</strong> in the WordPress menu.",
-					"<strong class=\"font-semibold text-gray-900\">Fill in Base URL:</strong> You can find this in Quick3 by looking at the URL. You enter something similar to this: <code class=\"text-sm font-mono text-gray-900\">https://q3.quick.no/ProdShared021</code>",
-					"<strong class=\"font-semibold text-gray-900\">Save and test the connection</strong> to verify that everything works."
-				]
-			}
-		},
-		"step5": {
-			"title": "5. Configure order settings",
-			"description": "Link WooCommerce payment methods to Quick3 payment terms for automatic order synchronization. This ensures that orders are processed correctly in Quick3 based on how the customer pays.",
-			"steps": [
-				"<strong class=\"font-semibold text-gray-900\">Go to Quick3 for WooCommerce → Settings → Order Settings</strong> in the WordPress menu.",
-				"<strong class=\"font-semibold text-gray-900\">Enable Auto-sync orders to Quick3</strong> for automatic order synchronization.",
-				"<strong class=\"font-semibold text-gray-900\">Match payment methods:</strong> Match the payment method in WooCommerce with the correct account in Quick3.",
-				"<strong class=\"font-semibold text-gray-900\">Select default account for new products:</strong> If there's a product in WooCommerce that doesn't exist in Quick3, you must select a default account that this should be posted to in Quick3.",
-				"<strong class=\"font-semibold text-gray-900\">Save the settings</strong> when you're done with the configuration."
-			],
-			"note": "Payment terms are automatically fetched from Quick3 when the connection is configured, so you always have updated options to choose from."
-		},
-		"step6": {
-			"title": "6. Verify synchronization jobs",
-			"description": "Now that everything is configured, check that automatic synchronization jobs are running as expected.",
-			"steps": [
-				"<strong class=\"font-semibold text-gray-900\">Go to Quick3 for WooCommerce → Jobs</strong> to see job status.",
-				"<strong class=\"font-semibold text-gray-900\">Look for job runs</strong> that start automatically based on the configured interval.",
-				"<strong class=\"font-semibold text-gray-900\">Click on a job</strong> to see detailed status and logs in real-time.",
-				"<strong class=\"font-semibold text-gray-900\">Wait for \"Completed\" status</strong> – the first sync can take a few minutes depending on the number of products."
-			],
-			"syncTitle": "What gets synchronized?",
-			"syncItems": [
-				"Products from Quick3 to WooCommerce",
-				"Prices and sales",
-				"Inventory levels",
-				"Product images",
-				"Product variants"
-			]
-		},
-		"step7": {
-			"title": "7. Confirm order synchronization",
-			"description": "The final step is to test that orders are synchronized correctly back to Quick3. This ensures that the entire flow from online store to ERP system works seamlessly.",
-			"steps": [
-				"<strong class=\"font-semibold text-gray-900\">Go to the WooCommerce store</strong> and place a test order.",
-				"<strong class=\"font-semibold text-gray-900\">Complete the payment</strong> and make sure the order has reached \"processing\".",
-				"<strong class=\"font-semibold text-gray-900\">Log in to Quick3</strong> and verify that the order appears there.",
-				"<strong class=\"font-semibold text-gray-900\">Check details</strong> – customer, product, and payment information should be correct."
-			],
-			"congratulations": "Congratulations! Quick3 for WooCommerce is now fully configured and ready to use. You have automatic synchronization of products, prices, inventory, and orders."
-		},
-		"readyToGo": {
-			"title": "You're ready to go live!",
-			"paragraph1": "Quick3 for WooCommerce will now automatically keep products, prices, and inventory synchronized between Quick3 ERP and WooCommerce. Orders are automatically sent to Quick3 when paid, and everything happens in the background without you needing to do anything.",
-			"paragraph2": "Synchronization runs automatically every 15 minutes (if you have enterprise), which means product data and inventory status are always up to date. You can check job status in the admin panel at any time or adjust settings as needed."
-		},
-		"nextSteps": {
-			"title": "Next steps",
-			"docs": {
-				"title": "Read the documentation →",
-				"description": "Learn more about how synchronization works and explore advanced features"
-			},
-			"contact": {
-				"title": "Need help? →",
-				"description": "Contact us for support, assistance, or questions about the setup"
-			}
-		}
-	},
-	"docs": {
-		"tagline": "Complete guide",
-		"title": "Documentation",
-		"intro": "Complete user guide for Quick3 for WooCommerce. This documentation covers all aspects of the plugin, from technical details to troubleshooting.",
-		"quickLinks": {
-			"title": "Quick links",
-			"overview": "→ Overview",
-			"sync": "→ How synchronization works",
-			"orderSync": "→ Order synchronization",
-			"jobSystem": "→ Job system",
-			"troubleshooting": "→ Troubleshooting",
-			"support": "→ Support"
-		},
-		"overview": {
-			"title": "Overview",
-			"intro": "Quick3 for WooCommerce is a WordPress plugin that automatically synchronizes product data between the Quick3 ERP system and your WooCommerce store. The plugin handles:",
-			"features": [
-				"Automatic product import from Quick3",
-				"Automatic inventory updates",
-				"Price synchronization including sale prices",
-				"Product images and variants",
-				"Order synchronization back to Quick3",
-				"Background processing for large catalogs"
-			],
-			"requirementsTitle": "Technical requirements",
-			"requirementsIntro": "To use Quick3 for WooCommerce you need:",
-			"requirements": [
-				{
-					"label": "WordPress",
-					"description": "version 6.0 or newer"
-				},
-				{
-					"label": "WooCommerce",
-					"description": "version 7.0 or newer"
-				},
-				{
-					"label": "PHP",
-					"description": "version 8.1 or newer"
-				},
-				{
-					"label": "WP-CLI",
-					"description": "installed on the server"
-				},
-				{
-					"label": "Quick3 API access",
-					"description": "with valid API token"
-				}
-			],
-			"performanceNote": "Recommended: VPS with multiple CPU cores provides significantly better performance than standard web hosting. Synchronization requires processing power for data transformation and product matching, especially for large product catalogs."
-		},
-		"sync": {
-			"title": "How synchronization works",
-			"flowTitle": "Synchronization flow",
-			"flowIntro": "The synchronization process follows these steps:",
-			"flowSteps": [
-				{
-					"label": "Fetching:",
-					"description": "Product data is fetched from Quick3 API"
-				},
-				{
-					"label": "Transformation:",
-					"description": "Data is converted to WooCommerce format"
-				},
-				{
-					"label": "Matching:",
-					"description": "Existing products are matched via SKU"
-				},
-				{
-					"label": "Updating:",
-					"description": "Products are created or updated in WooCommerce"
-				},
-				{
-					"label": "Images:",
-					"description": "Product images are downloaded and added to WordPress media library"
-				},
-				{
-					"label": "Verification:",
-					"description": "Changes are verified and logged"
-				}
-			],
-			"whatSyncTitle": "What gets synchronized?",
-			"productInfo": {
-				"title": "Product information",
-				"items": [
-					"Product name and description",
-					"SKU (Stock Keeping Unit)",
-					"Barcode (synced to GTIN field in WooCommerce)",
-					"Product categories",
-					"Product attributes",
-					"Dimensions and weight"
-				]
-			},
-			"pricing": {
-				"title": "Pricing",
-				"items": [
-					"Regular price",
-					"Sale price",
-					"Price periods (from/to date)",
-					"VAT/Tax handling"
-				]
-			},
-			"inventory": {
-				"title": "Inventory",
-				"items": [
-					"Stock quantity",
-					"Stock status (in stock / out of stock)"
-				]
-			},
-			"images": {
-				"title": "Images",
-				"items": [
-					"Main product image",
-					"Product gallery",
-					"Variant images"
-				]
-			},
-			"variations": {
-				"title": "Variations",
-				"items": [
-					"Product variations (sizes, colors, etc.)",
-					"Variation prices",
-					"Variation stock",
-					"Variation attributes"
-				]
-			},
-			"matchingTitle": "Product matching",
-			"matchingDescription": "To avoid duplicates, Quick3 for WooCommerce matches products based on SKU (Stock Keeping Unit). If a product with the same SKU already exists in WooCommerce, it will be updated instead of creating a new product.",
-			"matchingTip": "Tip: Keep SKU values consistent between Quick3 and WooCommerce for best results. Avoid manually changing SKUs in WooCommerce.",
-			"scheduleTitle": "Frequency and scheduling",
-			"scheduleIntro": "You can configure how often synchronization should run:",
-			"scheduleOptions": [
-				{
-					"label": "Every 15 minutes:",
-					"description": "Recommended for high-volume businesses"
-				},
-				{
-					"label": "Every 30 minutes:",
-					"description": "Standard for most stores"
-				},
-				{
-					"label": "Hourly:",
-					"description": "For stores with infrequent product changes"
-				},
-				{
-					"label": "Every 2 hours:",
-					"description": "Minimum recommended frequency"
-				},
-				{
-					"label": "Manual:",
-					"description": "Only when you manually start the job"
-				}
-			],
-			"apiLimitNote": "Important: Quick3 API has a rate limit of approximately 4 requests per hour for batch operations. The plugin fetches all products every 15 minutes instead of separate stock updates to avoid exceeding this limit.",
-			"productConnectionsTitle": "Product Relationships",
-			"productConnectionsIntro": "Quick3 for WooCommerce automatically synchronizes product relationships from Quick3 to WooCommerce. These relationships help customers discover related products and increase average order value.",
-			"upsells": {
-				"title": "Upsell Products (Alternative Products)",
-				"description": "Alternative products from Quick3 become upsell suggestions in WooCommerce. These are bidirectional relationships between parent products.",
-				"items": [
-					"Quick3 'Alternative' connection type maps to WooCommerce upsells",
-					"Displayed on product pages as \"You may also like...\"",
-					"Bidirectional: If Product A suggests Product B, then Product B suggests Product A",
-					"Always links between parent products (not variations)"
-				]
-			},
-			"crossSells": {
-				"title": "Cross-sell Products (Accessory Products)",
-				"description": "Accessory products from Quick3 become cross-sell suggestions in WooCommerce. These are unidirectional relationships.",
-				"items": [
-					"Quick3 'Accessory' connection type maps to WooCommerce cross-sells",
-					"Displayed in cart and checkout as complementary products",
-					"Unidirectional: Product A can suggest Product B, but not vice versa",
-					"Can link to specific product variations or main products"
-				]
-			},
-			"metadata": {
-				"title": "Other Connection Types (Metadata)",
-				"description": "Other Quick3 connection types are stored as structured metadata for future use:",
-				"items": [
-					"Contains, Set, TransferredTo, FractionOf, Batch, EntityFee, BatchWithoutHead",
-					"Stored in product meta fields: _q3wc_conn_[type] and _q3wc_connections_detail",
-					"Available for custom integrations and future features",
-					"Preserved with full source system data (priceFactor, quantityFactor, etc.)"
-				]
-			},
-			"automatic": {
-				"title": "Automatic Synchronization",
-				"description": "Product connections are automatically synchronized every 15 minutes via a background job. The system intelligently resolves product variations to parent products for upsells, while preserving specific variation links for cross-sells. Only products with changed connections are updated to maintain performance."
-			},
-			"viewInWooCommerce": {
-				"title": "Viewing in WooCommerce",
-				"steps": [
-					"Go to <strong class=\"font-semibold text-gray-900\">Products</strong> in WordPress admin",
-					"Edit any product that has connections",
-					"Scroll to <strong class=\"font-semibold text-gray-900\">Linked Products</strong> section",
-					"See upsells in \"Upsells\" field and cross-sells in \"Cross-sells\" field",
-					"Additional connection types are stored in custom fields (viewable in \"Custom Fields\" section)"
-				]
-			}
-		},
-		"orderSync": {
-			"title": "Order synchronization",
-			"intro": "Quick3 for WooCommerce keeps orders synchronized between WooCommerce and Quick3 throughout the entire order lifecycle, from placement to completion, returns and cancellations.",
-			"newOrders": {
-				"title": "New orders",
-				"description": "When a customer completes a payment in WooCommerce, the order is automatically synchronized to Quick3.",
-				"items": [
-					{
-						"label": "Trigger:",
-						"description": "Payment provider marks the order as paid and sets the order to \"Processing\" in WooCommerce"
-					},
-					{
-						"label": "Action:",
-						"description": "A new order is automatically created in Quick3"
-					},
-					{
-						"label": "Data:",
-						"description": "Customer info, products, prices and payment details are transferred"
-					}
-				]
-			},
-			"shipping": {
-				"title": "Shipping updates",
-				"description": "Tracking information from Quick3 is automatically synchronized back to WooCommerce when you add shipping in Quick3.",
-				"items": [
-					{
-						"label": "From Quick3 to WooCommerce:",
-						"description": "Tracking number and shipping information"
-					},
-					{
-						"label": "Customer:",
-						"description": "Customer automatically receives tracking information"
-					}
-				]
-			},
-			"completed": {
-				"title": "Completed orders",
-				"description": "When you invoice an order in Quick3, the order is automatically marked as completed in WooCommerce.",
-				"items": [
-					{
-						"label": "Trigger:",
-						"description": "You click \"Invoice\" in Quick3"
-					},
-					{
-						"label": "Action:",
-						"description": "Order status in WooCommerce is updated to \"Completed\""
-					},
-					{
-						"label": "Customer:",
-						"description": "Customer receives completion confirmation from WooCommerce"
-					}
-				]
-			},
-			"returns": {
-				"title": "Returns",
-				"description": "Returns must be handled from WooCommerce and are then automatically synchronized to Quick3.",
-				"items": [
-					{
-						"label": "Create return:",
-						"description": "Returns are created in WooCommerce"
-					},
-					{
-						"label": "Synchronization:",
-						"description": "The return is created as a new order in Quick3 with negative amounts"
-					},
-					{
-						"label": "Inventory management:",
-						"description": "Inventory is automatically updated"
-					}
-				],
-				"tip": "Tip: Always start returns from WooCommerce to ensure correct synchronization to Quick3."
-			},
-			"cancellation": {
-				"title": "Order cancellation",
-				"description": "Orders that are not invoiced or have associated pick lists can be cancelled directly from WooCommerce.",
-				"items": [
-					{
-						"label": "Requirement:",
-						"description": "The order must not be invoiced in Quick3"
-					},
-					{
-						"label": "Action:",
-						"description": "The order is deleted from Quick3"
-					},
-					{
-						"label": "Refund:",
-						"description": "Associated refund order is also deleted"
-					}
-				],
-				"warning": "Important: Invoiced orders cannot be cancelled. These must be handled as returns instead."
-			},
-			"limitations": {
-				"title": "Limitations",
-				"description": "Due to limitations in the Quick3 API, some operations are not supported:",
-				"items": [
-					{
-						"label": "Order updates:",
-						"description": "Existing orders cannot be modified after creation in Quick3"
-					},
-					{
-						"label": "Reason codes:",
-						"description": "Quick3 API does not support updating orders via API"
-					},
-					{
-						"label": "Solution:",
-						"description": "Changes must be made manually in Quick3"
-					}
-				],
-				"note": "Note: If you need to modify an order after it has been created, this must be done directly in Quick3. This is a limitation in the Quick3 API."
-			}
-		},
-		"jobSystem": {
-			"title": "Job system",
-			"intro": "Quick3 for WooCommerce uses a robust background job system to handle synchronization.",
-			"typesTitle": "Job types",
-			"types": [
-				{
-					"title": "Product import",
-					"description": "Fetches all products from Quick3 and updates the WooCommerce catalog. Runs automatically based on configured frequency."
-				},
-				{
-					"title": "Order synchronization",
-					"description": "Fetches updated information from Quick3 per order and updates with tracking info. Runs automatically every 15 minutes."
-				}
-			],
-			"monitoringTitle": "Job monitoring",
-			"monitoringIntro": "You can monitor synchronization jobs in real-time:",
-			"monitoringSteps": [
-				"Go to <strong class=\"font-semibold text-gray-900\">Quick3 for WooCommerce → Jobs</strong>",
-				"View status of ongoing and completed jobs",
-				"Click on a job to see detailed logs",
-				"Identify and resolve any errors"
-			],
-			"errorTitle": "Error handling",
-			"errorIntro": "If synchronization fails:",
-			"errorSteps": [
-				"Job is marked with error status",
-				"Error message is logged with details",
-				"Plugin automatically retries at next scheduled run",
-				"You can manually run the job again from the admin panel"
-			],
-			"performanceTitle": "Performance and optimization",
-			"performanceIntro": "Quick3 for WooCommerce is optimized for performance:",
-			"performanceItems": [
-				{
-					"label": "Background processing:",
-					"description": "Jobs run in the background without affecting frontend"
-				},
-				{
-					"label": "Change detection:",
-					"description": "Only changed products are updated (hash-based)"
-				},
-				{
-					"label": "Database optimization:",
-					"description": "Efficient queries with indexing"
-				},
-				{
-					"label": "Image optimization:",
-					"description": "Images are downloaded asynchronously"
-				}
-			]
-		},
-		"troubleshooting": {
-			"title": "Troubleshooting",
-			"intro": "Solutions to common problems and questions about Quick3 for WooCommerce.",
-			"connection": {
-				"title": "Connection problems",
-				"invalidToken": {
-					"problem": "Getting \"Invalid API token\" error message",
-					"solution": "Solution:",
-					"steps": [
-						"Double-check that the API token is correctly copied from Quick3",
-						"Ensure there are no spaces before or after the token",
-						"Verify that the token has not expired",
-						"Generate a new token if necessary"
-					]
-				},
-				"cannotConnect": {
-					"problem": "Cannot connect to Quick3 API",
-					"solution": "Solution:",
-					"steps": [
-						"Check that the Quick3 Base URL is correct",
-						"Verify that your server can reach the Quick3 API (no firewall blocks)",
-						"Test the connection from WordPress by running a manual synchronization",
-						"Check WordPress debug log for detailed error messages"
-					]
-				}
-			},
-			"syncIssues": {
-				"title": "Synchronization problems",
-				"noSync": {
-					"problem": "Products are not synchronizing",
-					"solution": "Solution:",
-					"steps": [
-						"Go to <strong class=\"font-semibold text-gray-900\">Quick3 for WooCommerce → Jobs</strong> and check job status",
-						"Look for error messages in the job log",
-						"Verify that automatic synchronization is enabled",
-						"Check that WordPress cron is running correctly",
-						"Try running a manual synchronization by clicking \"New job\""
-					]
-				},
-				"partialSync": {
-					"problem": "Only some products are imported",
-					"solution": "Solution:",
-					"steps": [
-						"Check if the product is set as active in Quick3",
-						"Check if the product is set as web-active in Quick3",
-						"Check the job log for warnings about specific products",
-						"Verify that products have valid data in Quick3",
-						"Check that products have unique SKU values",
-						"Look for memory limits (PHP memory_limit) that may stop large imports"
-					]
-				}
-			},
-			"performance": {
-				"title": "Performance issues",
-				"slowSync": {
-					"problem": "Synchronization takes very long",
-					"solution": "Solution:",
-					"steps": [
-						"Large catalogs (1000+ products) naturally take longer",
-						"Increase CPU and RAM on the server",
-						"Check that the server has enough memory (at least 256MB PHP memory_limit)",
-						"Increase PHP max_execution_time if jobs timeout"
-					]
-				},
-				"slowSite": {
-					"problem": "Website slows down during synchronization",
-					"solution": "Solution:",
-					"steps": [
-						"Check server resources (CPU, memory, disk I/O). Consider increasing capacity",
-						"Consider reducing synchronization frequency",
-						"Contact hosting provider if problems persist"
-					]
-				}
-			},
-			"products": {
-				"title": "Product issues",
-				"duplicates": {
-					"problem": "Products are being duplicated",
-					"solution": "Solution:",
-					"steps": [
-						"Check that products have unique SKU values in both Quick3 and WooCommerce",
-						"Do not manually change SKUs in WooCommerce after first import",
-						"Delete duplicates manually and run synchronization again",
-						"Contact support if the problem continues"
-					]
-				},
-				"noImages": {
-					"problem": "Images are not uploading",
-					"solution": "Solution:",
-					"steps": [
-						"Check that WordPress has write permissions to the uploads folder",
-						"Verify that image URLs from Quick3 are accessible",
-						"Check PHP upload_max_filesize and post_max_size settings",
-						"Look in the job log for specific image errors"
-					]
-				},
-				"wrongPrices": {
-					"problem": "Prices are incorrect",
-					"solution": "Solution:",
-					"steps": [
-						"Check that prices are correct in Quick3",
-						"Verify VAT/TAX settings in both Quick3 and WooCommerce",
-						"Check currency settings",
-						"Run a new synchronization to update prices"
-					]
-				}
-			},
-			"jobs": {
-				"title": "Job system",
-				"stuckJobs": {
-					"problem": "Jobs are getting stuck",
-					"solution": "Solution:",
-					"steps": [
-						"Check if the job is actually running (see job log in admin panel)",
-						"Wait at least 15 minutes before concluding it has stopped",
-						"Contact support if the job is still stuck"
-					]
-				},
-				"noLogs": {
-					"problem": "Cannot see job logs",
-					"solution": "Solution:",
-					"steps": [
-						"Check that WordPress has write permissions to the log folder",
-						"Verify that logs have not been automatically deleted",
-						"See WordPress debug.log for system errors"
-					]
-				}
-			},
-			"wordpress": {
-				"title": "WordPress-specific issues",
-				"cronNotRunning": {
-					"problem": "Cron jobs are not running",
-					"solution": "Solution:",
-					"steps": [
-						"Check that WordPress cron is not disabled in wp-config.php",
-						"Contact hosting provider to verify that cron is working correctly",
-						"Consider setting up system cron instead of WP-Cron"
-					]
-				},
-				"pluginConflicts": {
-					"problem": "Plugin conflicts",
-					"solution": "Solution:",
-					"steps": [
-						"Temporarily disable other plugins to identify conflicts",
-						"Cache plugins in particular can interfere with synchronization",
-						"Report conflicts to support"
-					]
-				}
-			},
-			"debugMode": {
-				"title": "Debug mode",
-				"description": "To get more detailed information about errors, enable WordPress debug mode:",
-				"code": "// In wp-config.php\ndefine('WP_DEBUG', true);\ndefine('WP_DEBUG_LOG', true);\ndefine('WP_DEBUG_DISPLAY', false);",
-				"logLocation": "Logs will be written to <code class=\"text-sm font-mono text-gray-900\">wp-content/debug.log</code>."
-			}
-		},
-		"support": {
-			"title": "Need help?",
-			"intro": "If you still have issues after trying the solutions above, we're here to help. Contact us directly or get started with setup by following our guide.",
-			"getStarted": {
-				"title": "Get started →",
-				"description": "Follow our step-by-step guide to set up Quick3 for WooCommerce"
-			},
-			"contact": {
-				"title": "Contact us →",
-				"description": "Send us a message for support, assistance or questions"
-			},
-			"tip": "Tip: The more information you provide when contacting us, the faster we can help you solve the problem."
-		}
-	},
-	"meta": {
-		"home": {
-			"title": "Quick3 for WooCommerce - Automatic synchronization between Quick3 ERP and WooCommerce",
-			"description": "Save time and avoid errors with automatic synchronization of products, prices, inventory, and orders between Quick3 ERP and WooCommerce. Norwegian WordPress plugin with reliable background processing."
-		},
-		"getStarted": {
-			"title": "Get Started - Quick3 for WooCommerce",
-			"description": "Get started with Quick3 for WooCommerce. Install the plugin, configure API token, and start synchronizing between Quick3 ERP and WooCommerce."
-		},
-		"docs": {
-			"title": "Documentation - Quick3 for WooCommerce",
-			"description": "Documentation for Quick3 for WooCommerce. Learn how to configure and use the plugin to synchronize products, prices, and inventory between Quick3 ERP and WooCommerce."
-		},
-		"privacy": {
-			"title": "Privacy Policy - Quick3 for WooCommerce",
-			"description": "Privacy policy for Quick3 for WooCommerce."
-		}
-	}
+  "nav": {
+    "home": "Home",
+    "getStarted": "Get Started",
+    "docs": "Documentation",
+    "partners": "Partners",
+    "wordpressOrg": "WordPress.org",
+    "openMenu": "Open main menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "title": "Give your customers an online store they love – keep the Quick3 you trust",
+    "subtitle": "Install the WordPress plugin that connects WooCommerce and Quick3 automatically. Increase sales and conversions with seamless ERP integration.",
+    "description": "Combine the strengths: Let Quick3 handle accounting, inventory, and logistics. Let WooCommerce drive sales with professional design, modern checkout, and seamless user experience.",
+    "ctaPrimary": "Get started yourself",
+    "ctaPrimaryPartner": "Get setup help",
+    "ctaSecondary": "Read documentation",
+    "ctaSecondaryArrow": "→"
+  },
+  "features": {
+    "heading": "Automate everything",
+    "title": "Everything you need for seamless synchronization",
+    "description": "Quick3 for WooCommerce makes it easy to keep products and inventory synchronized between Quick3 ERP and WooCommerce. Robust background processing handles large catalogs without issues.",
+    "productSync": {
+      "name": "Automatic product synchronization",
+      "description": "Import and update products from Quick3 to WooCommerce automatically. Product information, images, prices, and variants are always kept up to date – without manual work."
+    },
+    "orderSync": {
+      "name": "Real-time order synchronization",
+      "description": "Orders from WooCommerce are instantly transferred to Quick3 with complete customer data and payment information. No delays, no manual intervention."
+    },
+    "multiWarehouse": {
+      "name": "Multi-warehouse management",
+      "description": "Keep inventory updated across all locations. Customers can see availability per warehouse directly in the online store – perfect for physical stores with multiple locations."
+    },
+    "smartPricing": {
+      "name": "Intelligent pricing",
+      "description": "Advanced pricing system with support for regular price, sale prices and time-based campaigns. Everything synchronizes automatically."
+    },
+    "backgroundProcessing": {
+      "name": "Reliable background processing",
+      "description": "Robust job system handles large catalogs without problems. Processes run in the background without affecting store performance, with automatic error handling and self-healing functions."
+    },
+    "wordpressNative": {
+      "name": "WordPress-native plugin",
+      "description": "Built with WordPress and WooCommerce standards. Follows best practices for performance, security, and maintenance. Full support for WooCommerce hooks and filters for developers."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "Can I get help setting up the plugin?",
+        "answer": "Yes! Our <a href=\"/en/partnere\" class=\"text-indigo-600 hover:text-indigo-500 underline\">partners</a> can help you with professional setup and support."
+      },
+      {
+        "question": "What is Quick3 for WooCommerce?",
+        "answer": "Quick3 for WooCommerce is a WordPress plugin that automatically synchronizes products, prices, inventory, orders, and customers between Quick3 ERP and your WooCommerce store. Everything runs in the background, keeping your online store updated with the Quick3 system without manual intervention."
+      },
+      {
+        "question": "What are the system requirements?",
+        "answer": "The plugin requires: WordPress 6.0 or newer, WooCommerce 7.0 or newer, PHP 8.1 or newer, WP-CLI installed on the server, and a valid Quick3 API token. We strongly recommend a VPS with multiple CPU cores rather than standard web hosting, as synchronization requires processing power for data transformation and product matching."
+      },
+      {
+        "question": "How do I get a Quick3 API token?",
+        "answer": "You can get the API token from your Quick3 account. Once you have it, add it to your WordPress configuration by defining QUICK3_TOKEN in your wp-config.php file: define('QUICK3_TOKEN', 'your-api-token-here'); Read the \"Get Started\" guide for more information about this process. The plugin displays configuration status on the Quick3 Settings page."
+      },
+      {
+        "question": "How often is data synchronized between Quick3 and WooCommerce?",
+        "answer": "Synchronization frequency depends on your subscription: Free (manual synchronization only), Business (every 30 minutes), Enterprise (every 15 minutes). You can configure this under WP Admin > Quick3 Settings > Synchronization Settings."
+      },
+      {
+        "question": "What data is synchronized?",
+        "answer": "The plugin synchronizes: products and product variants, product names, descriptions and attributes, regular prices and sale prices (including time-based campaigns), stock levels and stock status, product images, orders (from WooCommerce to Quick3), and customer information."
+      },
+      {
+        "question": "What are the product limits for each plan?",
+        "answer": "Free: Up to 50 products, Business: Up to 10,000 products, Enterprise: Unlimited products. The plugin displays your current usage and limits on the Quick3 Settings page with a visual progress bar."
+      },
+      {
+        "question": "Does the plugin work with Quick3's API limitations?",
+        "answer": "Yes, the plugin is designed to work within Quick3's strict API limitations. Instead of making separate API calls for each inventory update, the plugin fetches all products periodically (based on your subscription). This stays well within API limits while keeping your inventory synchronized."
+      },
+      {
+        "question": "What happens to my existing WooCommerce products?",
+        "answer": "The plugin does not delete existing WooCommerce products. It creates a link between Quick3 products and WooCommerce products using SKU and metadata. If a product exists, it is updated. If no match is found, a new product is created. Existing products not from Quick3 remain untouched."
+      },
+      {
+        "question": "How do I troubleshoot if products are not synchronizing?",
+        "answer": "Check these common issues first: Verify that the Quick3 API token is correctly configured in Quick3 Settings, check that WordPress cron is working properly, view job status under WP Admin > Jobs to check if any jobs failed, check job logs for specific error messages, and ensure you haven't reached the product limit for your subscription."
+      },
+      {
+        "question": "Can I trigger a synchronization manually instead of waiting for automatic sync?",
+        "answer": "Yes! You can trigger a product synchronization manually at any time from WP Admin > Quick3 for WooCommerce > Jobs. Click \"New job\" and select the job you want to run. This is useful for testing the connection or immediately updating after changes in Quick3. Quick3's API limitations still apply, but the plugin has built-in protection that prevents you from exceeding these limits."
+      }
+    ]
+  },
+  "pricing": {
+    "heading": "Pricing",
+    "title": "Pricing",
+    "description": "Choose a pricing plan that fits your needs. All plans include automatic synchronization and reliable background processing.",
+    "frequency": {
+      "monthly": "Monthly",
+      "annually": "Annually"
+    },
+    "perMonth": "/month",
+    "perYear": "/year",
+    "mostPopular": "Most popular",
+    "choosePlan": "Choose plan",
+    "getFreeStart": "Get started for free",
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "description": "Get started with basic synchronization for small catalogs.",
+        "features": [
+          "No support",
+          "50 products",
+          "1 day log retention",
+          "Product synchronization every hour"
+        ]
+      },
+      "business": {
+        "name": "Business",
+        "description": "For growing businesses with active product management and support.",
+        "features": [
+          "Email support",
+          "10,000 products",
+          "30 days log retention",
+          "Product synchronization every 30 minutes"
+        ]
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Premium solution with unlimited capacity and priority support.",
+        "features": [
+          "Priority email support",
+          "Unlimited products",
+          "Unlimited log retention",
+          "Product synchronization every 15 minutes"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get help with existing installation or setting up a new one.",
+    "form": {
+      "name": "Name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone number:",
+      "message": "Message",
+      "submit": "Send message",
+      "sending": "Sending...",
+      "privacyText": "By checking this, you agree to our",
+      "privacyLink": "privacy policy",
+      "successMessage": "Thank you! Your message has been sent successfully.",
+      "errorMessage": "Failed to send message. Please try again.",
+      "configError": "Configuration error. Please contact support."
+    }
+  },
+  "partners": {
+    "title": "Our Partners",
+    "subtitle": "Get professional help with setup",
+    "description": "Our partners are experienced professionals who can help you get started, set up the integration, and provide ongoing support.",
+    "learnMore": "Learn more",
+    "viewAll": "View all partners",
+    "backToPartners": "← Back to partners",
+    "contactPartner": "Contact partner",
+    "services": "Services",
+    "location": "Location",
+    "website": "Visit website",
+    "email": "Send email",
+    "phone": "Call us",
+    "noPartnersYet": "We're adding partners regularly. Check back soon!",
+    "cta": {
+      "title": "Become an Implementation Partner",
+      "description": "Are you a developer or agency working with WooCommerce and ERP integrations? Become an official Quick3 for WooCommerce partner and gain access to a growing market of customers who need professional help with setup, customizations, and maintenance.",
+      "primaryButton": "Apply for partnership",
+      "secondaryButton": "Learn about our program"
+    },
+    "meta": {
+      "title": "Partners - Quick3 for WooCommerce",
+      "description": "Find professional partners who can help you with setup and operations of Quick3 for WooCommerce."
+    }
+  },
+  "footer": {
+    "copyright": "Iniva AS. Quick3 for WooCommerce is a product by Iniva.",
+    "privacy": "Privacy Policy"
+  },
+  "getStarted": {
+    "tagline": "Quick3 for WooCommerce",
+    "title": "Get started in under 10 minutes",
+    "intro": "Follow this simple guide to connect Quick3 ERP to WooCommerce. With 7 easy steps, you'll have automatic synchronization of products, prices, orders, and inventory.",
+    "downloadSection": {
+      "title": "Download plugin",
+      "description": "Get started for free by downloading the Quick3 for WooCommerce plugin. No credit card required.",
+      "buttonText": "Download free"
+    },
+    "step1": {
+      "title": "1. Install the plugin",
+      "description": "Find and install Quick3 for WooCommerce from the WordPress plugin directory. The process takes just a few minutes and requires no technical expertise.",
+      "steps": [
+        "<strong class=\"font-semibold text-gray-900\">Log in to WordPress</strong> and go to the admin panel where you manage your site.",
+        "<strong class=\"font-semibold text-gray-900\">Plugins → Add New</strong> to find and install new WordPress plugins.",
+        "<strong class=\"font-semibold text-gray-900\">Search for \"Quick3 for WooCommerce\"</strong> in the plugin directory and click Install Now.",
+        "<strong class=\"font-semibold text-gray-900\">Activate the plugin</strong> after installation to get started."
+      ],
+      "warning": "Important: Make sure WooCommerce is already installed and activated before installing Quick3 for WooCommerce."
+    },
+    "step2": {
+      "title": "2. Activate license",
+      "description": "Activate or purchase a Freemius license to access all features. The plugin offers both free and paid options depending on your needs.",
+      "steps": [
+        "<strong class=\"font-semibold text-gray-900\">Follow the Freemius instructions</strong> displayed after activating the plugin.",
+        "<strong class=\"font-semibold text-gray-900\">Choose license type</strong> – free for testing or paid for production with priority support.",
+        "<strong class=\"font-semibold text-gray-900\">Business use?</strong> Paid license is recommended for production environments with dedicated support."
+      ]
+    },
+    "step3": {
+      "title": "3. Get Quick3 API token",
+      "description": "To connect to Quick3 ERP, you need an API token. This is generated directly from your Quick3 account and gives the plugin secure access to product data.",
+      "steps": [
+        "<strong class=\"font-semibold text-gray-900\">Log in to Quick3</strong> with your company account.",
+        "<strong class=\"font-semibold text-gray-900\">Go to Home → Client Settings → Security</strong> to manage API access.",
+        "<strong class=\"font-semibold text-gray-900\">Generate new token</strong> and select ApiV2 as the API type. Remember to mark it as active.",
+        "<strong class=\"font-semibold text-gray-900\">Copy the API key</strong> and have it ready for the next step."
+      ],
+      "warning": "If you don't have access to API settings, contact Quick3 support to activate API access on your account. We use V2 API (BETA)."
+    },
+    "step4": {
+      "title": "4. Configure Quick3 connection",
+      "description": "The API key should be added to the wp-config.php file as this is more secure than adding it via the admin panel.",
+      "substep1": {
+        "title": "Step 1: wp-config.php",
+        "description": "Edit <code class=\"text-sm font-mono text-gray-900\">wp-config.php</code> and add the following lines above <code class=\"text-sm font-mono text-gray-900\">/* That's all, stop editing! */</code>:",
+        "code": "// Quick3 API Configuration\ndefine('QUICK3_TOKEN', 'your-api-token-here');"
+      },
+      "substep2": {
+        "title": "Step 2: Via admin panel",
+        "steps": [
+          "<strong class=\"font-semibold text-gray-900\">Go to Quick3 for WooCommerce → Settings</strong> in the WordPress menu.",
+          "<strong class=\"font-semibold text-gray-900\">Fill in Base URL:</strong> You can find this in Quick3 by looking at the URL. You enter something similar to this: <code class=\"text-sm font-mono text-gray-900\">https://q3.quick.no/ProdShared021</code>",
+          "<strong class=\"font-semibold text-gray-900\">Save and test the connection</strong> to verify that everything works."
+        ]
+      }
+    },
+    "step5": {
+      "title": "5. Configure order settings",
+      "description": "Link WooCommerce payment methods to Quick3 payment terms for automatic order synchronization. This ensures that orders are processed correctly in Quick3 based on how the customer pays.",
+      "steps": [
+        "<strong class=\"font-semibold text-gray-900\">Go to Quick3 for WooCommerce → Settings → Order Settings</strong> in the WordPress menu.",
+        "<strong class=\"font-semibold text-gray-900\">Enable Auto-sync orders to Quick3</strong> for automatic order synchronization.",
+        "<strong class=\"font-semibold text-gray-900\">Match payment methods:</strong> Match the payment method in WooCommerce with the correct account in Quick3.",
+        "<strong class=\"font-semibold text-gray-900\">Select default account for new products:</strong> If there's a product in WooCommerce that doesn't exist in Quick3, you must select a default account that this should be posted to in Quick3.",
+        "<strong class=\"font-semibold text-gray-900\">Save the settings</strong> when you're done with the configuration."
+      ],
+      "note": "Payment terms are automatically fetched from Quick3 when the connection is configured, so you always have updated options to choose from."
+    },
+    "step6": {
+      "title": "6. Verify synchronization jobs",
+      "description": "Now that everything is configured, check that automatic synchronization jobs are running as expected.",
+      "steps": [
+        "<strong class=\"font-semibold text-gray-900\">Go to Quick3 for WooCommerce → Jobs</strong> to see job status.",
+        "<strong class=\"font-semibold text-gray-900\">Look for job runs</strong> that start automatically based on the configured interval.",
+        "<strong class=\"font-semibold text-gray-900\">Click on a job</strong> to see detailed status and logs in real-time.",
+        "<strong class=\"font-semibold text-gray-900\">Wait for \"Completed\" status</strong> – the first sync can take a few minutes depending on the number of products."
+      ],
+      "syncTitle": "What gets synchronized?",
+      "syncItems": [
+        "Products from Quick3 to WooCommerce",
+        "Prices and sales",
+        "Inventory levels",
+        "Product images",
+        "Product variants"
+      ]
+    },
+    "step7": {
+      "title": "7. Confirm order synchronization",
+      "description": "The final step is to test that orders are synchronized correctly back to Quick3. This ensures that the entire flow from online store to ERP system works seamlessly.",
+      "steps": [
+        "<strong class=\"font-semibold text-gray-900\">Go to the WooCommerce store</strong> and place a test order.",
+        "<strong class=\"font-semibold text-gray-900\">Complete the payment</strong> and make sure the order has reached \"processing\".",
+        "<strong class=\"font-semibold text-gray-900\">Log in to Quick3</strong> and verify that the order appears there.",
+        "<strong class=\"font-semibold text-gray-900\">Check details</strong> – customer, product, and payment information should be correct."
+      ],
+      "congratulations": "Congratulations! Quick3 for WooCommerce is now fully configured and ready to use. You have automatic synchronization of products, prices, inventory, and orders."
+    },
+    "readyToGo": {
+      "title": "You're ready to go live!",
+      "paragraph1": "Quick3 for WooCommerce will now automatically keep products, prices, and inventory synchronized between Quick3 ERP and WooCommerce. Orders are automatically sent to Quick3 when paid, and everything happens in the background without you needing to do anything.",
+      "paragraph2": "Synchronization runs automatically every 15 minutes (if you have enterprise), which means product data and inventory status are always up to date. You can check job status in the admin panel at any time or adjust settings as needed."
+    },
+    "nextSteps": {
+      "title": "Next steps",
+      "docs": {
+        "title": "Read the documentation →",
+        "description": "Learn more about how synchronization works and explore advanced features"
+      },
+      "contact": {
+        "title": "Need help? →",
+        "description": "Contact us for support, assistance, or questions about the setup"
+      }
+    }
+  },
+  "docs": {
+    "tagline": "Complete guide",
+    "title": "Documentation",
+    "intro": "Complete user guide for Quick3 for WooCommerce. This documentation covers all aspects of the plugin, from technical details to troubleshooting.",
+    "quickLinks": {
+      "title": "Quick links",
+      "overview": "→ Overview",
+      "sync": "→ How synchronization works",
+      "orderSync": "→ Order synchronization",
+      "jobSystem": "→ Job system",
+      "troubleshooting": "→ Troubleshooting",
+      "support": "→ Support"
+    },
+    "overview": {
+      "title": "Overview",
+      "intro": "Quick3 for WooCommerce is a WordPress plugin that automatically synchronizes product data between the Quick3 ERP system and your WooCommerce store. The plugin handles:",
+      "features": [
+        "Automatic product import from Quick3",
+        "Automatic inventory updates",
+        "Price synchronization including sale prices",
+        "Product images and variants",
+        "Order synchronization back to Quick3",
+        "Background processing for large catalogs"
+      ],
+      "requirementsTitle": "Technical requirements",
+      "requirementsIntro": "To use Quick3 for WooCommerce you need:",
+      "requirements": [
+        {
+          "label": "WordPress",
+          "description": "version 6.0 or newer"
+        },
+        {
+          "label": "WooCommerce",
+          "description": "version 7.0 or newer"
+        },
+        {
+          "label": "PHP",
+          "description": "version 8.1 or newer"
+        },
+        {
+          "label": "WP-CLI",
+          "description": "installed on the server"
+        },
+        {
+          "label": "Quick3 API access",
+          "description": "with valid API token"
+        }
+      ],
+      "performanceNote": "Recommended: VPS with multiple CPU cores provides significantly better performance than standard web hosting. Synchronization requires processing power for data transformation and product matching, especially for large product catalogs."
+    },
+    "sync": {
+      "title": "How synchronization works",
+      "flowTitle": "Synchronization flow",
+      "flowIntro": "The synchronization process follows these steps:",
+      "flowSteps": [
+        {
+          "label": "Fetching:",
+          "description": "Product data is fetched from Quick3 API"
+        },
+        {
+          "label": "Transformation:",
+          "description": "Data is converted to WooCommerce format"
+        },
+        {
+          "label": "Matching:",
+          "description": "Existing products are matched via SKU"
+        },
+        {
+          "label": "Updating:",
+          "description": "Products are created or updated in WooCommerce"
+        },
+        {
+          "label": "Images:",
+          "description": "Product images are downloaded and added to WordPress media library"
+        },
+        {
+          "label": "Verification:",
+          "description": "Changes are verified and logged"
+        }
+      ],
+      "whatSyncTitle": "What gets synchronized?",
+      "productInfo": {
+        "title": "Product information",
+        "items": [
+          "Product name and description",
+          "SKU (Stock Keeping Unit)",
+          "Barcode (synced to GTIN field in WooCommerce)",
+          "Product categories",
+          "Product attributes",
+          "Dimensions and weight"
+        ]
+      },
+      "pricing": {
+        "title": "Pricing",
+        "items": [
+          "Regular price",
+          "Sale price",
+          "Price periods (from/to date)",
+          "VAT/Tax handling"
+        ]
+      },
+      "inventory": {
+        "title": "Inventory",
+        "items": ["Stock quantity", "Stock status (in stock / out of stock)"]
+      },
+      "images": {
+        "title": "Images",
+        "items": ["Main product image", "Product gallery", "Variant images"]
+      },
+      "variations": {
+        "title": "Variations",
+        "items": [
+          "Product variations (sizes, colors, etc.)",
+          "Variation prices",
+          "Variation stock",
+          "Variation attributes"
+        ]
+      },
+      "matchingTitle": "Product matching",
+      "matchingDescription": "To avoid duplicates, Quick3 for WooCommerce matches products based on SKU (Stock Keeping Unit). If a product with the same SKU already exists in WooCommerce, it will be updated instead of creating a new product.",
+      "matchingTip": "Tip: Keep SKU values consistent between Quick3 and WooCommerce for best results. Avoid manually changing SKUs in WooCommerce.",
+      "scheduleTitle": "Frequency and scheduling",
+      "scheduleIntro": "You can configure how often synchronization should run:",
+      "scheduleOptions": [
+        {
+          "label": "Every 15 minutes:",
+          "description": "Recommended for high-volume businesses"
+        },
+        {
+          "label": "Every 30 minutes:",
+          "description": "Standard for most stores"
+        },
+        {
+          "label": "Hourly:",
+          "description": "For stores with infrequent product changes"
+        },
+        {
+          "label": "Every 2 hours:",
+          "description": "Minimum recommended frequency"
+        },
+        {
+          "label": "Manual:",
+          "description": "Only when you manually start the job"
+        }
+      ],
+      "apiLimitNote": "Important: Quick3 API has a rate limit of approximately 4 requests per hour for batch operations. The plugin fetches all products every 15 minutes instead of separate stock updates to avoid exceeding this limit.",
+      "productConnectionsTitle": "Product Relationships",
+      "productConnectionsIntro": "Quick3 for WooCommerce automatically synchronizes product relationships from Quick3 to WooCommerce. These relationships help customers discover related products and increase average order value.",
+      "upsells": {
+        "title": "Upsell Products (Alternative Products)",
+        "description": "Alternative products from Quick3 become upsell suggestions in WooCommerce. These are bidirectional relationships between parent products.",
+        "items": [
+          "Quick3 'Alternative' connection type maps to WooCommerce upsells",
+          "Displayed on product pages as \"You may also like...\"",
+          "Bidirectional: If Product A suggests Product B, then Product B suggests Product A",
+          "Always links between parent products (not variations)"
+        ]
+      },
+      "crossSells": {
+        "title": "Cross-sell Products (Accessory Products)",
+        "description": "Accessory products from Quick3 become cross-sell suggestions in WooCommerce. These are unidirectional relationships.",
+        "items": [
+          "Quick3 'Accessory' connection type maps to WooCommerce cross-sells",
+          "Displayed in cart and checkout as complementary products",
+          "Unidirectional: Product A can suggest Product B, but not vice versa",
+          "Can link to specific product variations or main products"
+        ]
+      },
+      "metadata": {
+        "title": "Other Connection Types (Metadata)",
+        "description": "Other Quick3 connection types are stored as structured metadata for future use:",
+        "items": [
+          "Contains, Set, TransferredTo, FractionOf, Batch, EntityFee, BatchWithoutHead",
+          "Stored in product meta fields: _q3wc_conn_[type] and _q3wc_connections_detail",
+          "Available for custom integrations and future features",
+          "Preserved with full source system data (priceFactor, quantityFactor, etc.)"
+        ]
+      },
+      "automatic": {
+        "title": "Automatic Synchronization",
+        "description": "Product connections are automatically synchronized every 15 minutes via a background job. The system intelligently resolves product variations to parent products for upsells, while preserving specific variation links for cross-sells. Only products with changed connections are updated to maintain performance."
+      },
+      "viewInWooCommerce": {
+        "title": "Viewing in WooCommerce",
+        "steps": [
+          "Go to <strong class=\"font-semibold text-gray-900\">Products</strong> in WordPress admin",
+          "Edit any product that has connections",
+          "Scroll to <strong class=\"font-semibold text-gray-900\">Linked Products</strong> section",
+          "See upsells in \"Upsells\" field and cross-sells in \"Cross-sells\" field",
+          "Additional connection types are stored in custom fields (viewable in \"Custom Fields\" section)"
+        ]
+      }
+    },
+    "orderSync": {
+      "title": "Order synchronization",
+      "intro": "Quick3 for WooCommerce keeps orders synchronized between WooCommerce and Quick3 throughout the entire order lifecycle, from placement to completion, returns and cancellations.",
+      "newOrders": {
+        "title": "New orders",
+        "description": "When a customer completes a payment in WooCommerce, the order is automatically synchronized to Quick3.",
+        "items": [
+          {
+            "label": "Trigger:",
+            "description": "Payment provider marks the order as paid and sets the order to \"Processing\" in WooCommerce"
+          },
+          {
+            "label": "Action:",
+            "description": "A new order is automatically created in Quick3"
+          },
+          {
+            "label": "Data:",
+            "description": "Customer info, products, prices and payment details are transferred"
+          }
+        ]
+      },
+      "shipping": {
+        "title": "Shipping updates",
+        "description": "Tracking information from Quick3 is automatically synchronized back to WooCommerce when you add shipping in Quick3.",
+        "items": [
+          {
+            "label": "From Quick3 to WooCommerce:",
+            "description": "Tracking number and shipping information"
+          },
+          {
+            "label": "Customer:",
+            "description": "Customer automatically receives tracking information"
+          }
+        ]
+      },
+      "completed": {
+        "title": "Completed orders",
+        "description": "When you invoice an order in Quick3, the order is automatically marked as completed in WooCommerce.",
+        "items": [
+          {
+            "label": "Trigger:",
+            "description": "You click \"Invoice\" in Quick3"
+          },
+          {
+            "label": "Action:",
+            "description": "Order status in WooCommerce is updated to \"Completed\""
+          },
+          {
+            "label": "Customer:",
+            "description": "Customer receives completion confirmation from WooCommerce"
+          }
+        ]
+      },
+      "returns": {
+        "title": "Returns",
+        "description": "Returns must be handled from WooCommerce and are then automatically synchronized to Quick3.",
+        "items": [
+          {
+            "label": "Create return:",
+            "description": "Returns are created in WooCommerce"
+          },
+          {
+            "label": "Synchronization:",
+            "description": "The return is created as a new order in Quick3 with negative amounts"
+          },
+          {
+            "label": "Inventory management:",
+            "description": "Inventory is automatically updated"
+          }
+        ],
+        "tip": "Tip: Always start returns from WooCommerce to ensure correct synchronization to Quick3."
+      },
+      "cancellation": {
+        "title": "Order cancellation",
+        "description": "Orders that are not invoiced or have associated pick lists can be cancelled directly from WooCommerce.",
+        "items": [
+          {
+            "label": "Requirement:",
+            "description": "The order must not be invoiced in Quick3"
+          },
+          {
+            "label": "Action:",
+            "description": "The order is deleted from Quick3"
+          },
+          {
+            "label": "Refund:",
+            "description": "Associated refund order is also deleted"
+          }
+        ],
+        "warning": "Important: Invoiced orders cannot be cancelled. These must be handled as returns instead."
+      },
+      "limitations": {
+        "title": "Limitations",
+        "description": "Due to limitations in the Quick3 API, some operations are not supported:",
+        "items": [
+          {
+            "label": "Order updates:",
+            "description": "Existing orders cannot be modified after creation in Quick3"
+          },
+          {
+            "label": "Reason codes:",
+            "description": "Quick3 API does not support updating orders via API"
+          },
+          {
+            "label": "Solution:",
+            "description": "Changes must be made manually in Quick3"
+          }
+        ],
+        "note": "Note: If you need to modify an order after it has been created, this must be done directly in Quick3. This is a limitation in the Quick3 API."
+      }
+    },
+    "jobSystem": {
+      "title": "Job system",
+      "intro": "Quick3 for WooCommerce uses a robust background job system to handle synchronization.",
+      "typesTitle": "Job types",
+      "types": [
+        {
+          "title": "Product import",
+          "description": "Fetches all products from Quick3 and updates the WooCommerce catalog. Runs automatically based on configured frequency."
+        },
+        {
+          "title": "Order synchronization",
+          "description": "Fetches updated information from Quick3 per order and updates with tracking info. Runs automatically every 15 minutes."
+        }
+      ],
+      "monitoringTitle": "Job monitoring",
+      "monitoringIntro": "You can monitor synchronization jobs in real-time:",
+      "monitoringSteps": [
+        "Go to <strong class=\"font-semibold text-gray-900\">Quick3 for WooCommerce → Jobs</strong>",
+        "View status of ongoing and completed jobs",
+        "Click on a job to see detailed logs",
+        "Identify and resolve any errors"
+      ],
+      "errorTitle": "Error handling",
+      "errorIntro": "If synchronization fails:",
+      "errorSteps": [
+        "Job is marked with error status",
+        "Error message is logged with details",
+        "Plugin automatically retries at next scheduled run",
+        "You can manually run the job again from the admin panel"
+      ],
+      "performanceTitle": "Performance and optimization",
+      "performanceIntro": "Quick3 for WooCommerce is optimized for performance:",
+      "performanceItems": [
+        {
+          "label": "Background processing:",
+          "description": "Jobs run in the background without affecting frontend"
+        },
+        {
+          "label": "Change detection:",
+          "description": "Only changed products are updated (hash-based)"
+        },
+        {
+          "label": "Database optimization:",
+          "description": "Efficient queries with indexing"
+        },
+        {
+          "label": "Image optimization:",
+          "description": "Images are downloaded asynchronously"
+        }
+      ]
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "intro": "Solutions to common problems and questions about Quick3 for WooCommerce.",
+      "connection": {
+        "title": "Connection problems",
+        "invalidToken": {
+          "problem": "Getting \"Invalid API token\" error message",
+          "solution": "Solution:",
+          "steps": [
+            "Double-check that the API token is correctly copied from Quick3",
+            "Ensure there are no spaces before or after the token",
+            "Verify that the token has not expired",
+            "Generate a new token if necessary"
+          ]
+        },
+        "cannotConnect": {
+          "problem": "Cannot connect to Quick3 API",
+          "solution": "Solution:",
+          "steps": [
+            "Check that the Quick3 Base URL is correct",
+            "Verify that your server can reach the Quick3 API (no firewall blocks)",
+            "Test the connection from WordPress by running a manual synchronization",
+            "Check WordPress debug log for detailed error messages"
+          ]
+        }
+      },
+      "syncIssues": {
+        "title": "Synchronization problems",
+        "noSync": {
+          "problem": "Products are not synchronizing",
+          "solution": "Solution:",
+          "steps": [
+            "Go to <strong class=\"font-semibold text-gray-900\">Quick3 for WooCommerce → Jobs</strong> and check job status",
+            "Look for error messages in the job log",
+            "Verify that automatic synchronization is enabled",
+            "Check that WordPress cron is running correctly",
+            "Try running a manual synchronization by clicking \"New job\""
+          ]
+        },
+        "partialSync": {
+          "problem": "Only some products are imported",
+          "solution": "Solution:",
+          "steps": [
+            "Check if the product is set as active in Quick3",
+            "Check if the product is set as web-active in Quick3",
+            "Check the job log for warnings about specific products",
+            "Verify that products have valid data in Quick3",
+            "Check that products have unique SKU values",
+            "Look for memory limits (PHP memory_limit) that may stop large imports"
+          ]
+        }
+      },
+      "performance": {
+        "title": "Performance issues",
+        "slowSync": {
+          "problem": "Synchronization takes very long",
+          "solution": "Solution:",
+          "steps": [
+            "Large catalogs (1000+ products) naturally take longer",
+            "Increase CPU and RAM on the server",
+            "Check that the server has enough memory (at least 256MB PHP memory_limit)",
+            "Increase PHP max_execution_time if jobs timeout"
+          ]
+        },
+        "slowSite": {
+          "problem": "Website slows down during synchronization",
+          "solution": "Solution:",
+          "steps": [
+            "Check server resources (CPU, memory, disk I/O). Consider increasing capacity",
+            "Consider reducing synchronization frequency",
+            "Contact hosting provider if problems persist"
+          ]
+        }
+      },
+      "products": {
+        "title": "Product issues",
+        "duplicates": {
+          "problem": "Products are being duplicated",
+          "solution": "Solution:",
+          "steps": [
+            "Check that products have unique SKU values in both Quick3 and WooCommerce",
+            "Do not manually change SKUs in WooCommerce after first import",
+            "Delete duplicates manually and run synchronization again",
+            "Contact support if the problem continues"
+          ]
+        },
+        "noImages": {
+          "problem": "Images are not uploading",
+          "solution": "Solution:",
+          "steps": [
+            "Check that WordPress has write permissions to the uploads folder",
+            "Verify that image URLs from Quick3 are accessible",
+            "Check PHP upload_max_filesize and post_max_size settings",
+            "Look in the job log for specific image errors"
+          ]
+        },
+        "wrongPrices": {
+          "problem": "Prices are incorrect",
+          "solution": "Solution:",
+          "steps": [
+            "Check that prices are correct in Quick3",
+            "Verify VAT/TAX settings in both Quick3 and WooCommerce",
+            "Check currency settings",
+            "Run a new synchronization to update prices"
+          ]
+        }
+      },
+      "jobs": {
+        "title": "Job system",
+        "stuckJobs": {
+          "problem": "Jobs are getting stuck",
+          "solution": "Solution:",
+          "steps": [
+            "Check if the job is actually running (see job log in admin panel)",
+            "Wait at least 15 minutes before concluding it has stopped",
+            "Contact support if the job is still stuck"
+          ]
+        },
+        "noLogs": {
+          "problem": "Cannot see job logs",
+          "solution": "Solution:",
+          "steps": [
+            "Check that WordPress has write permissions to the log folder",
+            "Verify that logs have not been automatically deleted",
+            "See WordPress debug.log for system errors"
+          ]
+        }
+      },
+      "wordpress": {
+        "title": "WordPress-specific issues",
+        "cronNotRunning": {
+          "problem": "Cron jobs are not running",
+          "solution": "Solution:",
+          "steps": [
+            "Check that WordPress cron is not disabled in wp-config.php",
+            "Contact hosting provider to verify that cron is working correctly",
+            "Consider setting up system cron instead of WP-Cron"
+          ]
+        },
+        "pluginConflicts": {
+          "problem": "Plugin conflicts",
+          "solution": "Solution:",
+          "steps": [
+            "Temporarily disable other plugins to identify conflicts",
+            "Cache plugins in particular can interfere with synchronization",
+            "Report conflicts to support"
+          ]
+        }
+      },
+      "debugMode": {
+        "title": "Debug mode",
+        "description": "To get more detailed information about errors, enable WordPress debug mode:",
+        "code": "// In wp-config.php\ndefine('WP_DEBUG', true);\ndefine('WP_DEBUG_LOG', true);\ndefine('WP_DEBUG_DISPLAY', false);",
+        "logLocation": "Logs will be written to <code class=\"text-sm font-mono text-gray-900\">wp-content/debug.log</code>."
+      }
+    },
+    "support": {
+      "title": "Need help?",
+      "intro": "If you still have issues after trying the solutions above, we're here to help. Contact us directly or get started with setup by following our guide.",
+      "getStarted": {
+        "title": "Get started →",
+        "description": "Follow our step-by-step guide to set up Quick3 for WooCommerce"
+      },
+      "contact": {
+        "title": "Contact us →",
+        "description": "Send us a message for support, assistance or questions"
+      },
+      "tip": "Tip: The more information you provide when contacting us, the faster we can help you solve the problem."
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "Quick3 for WooCommerce - Automatic synchronization between Quick3 ERP and WooCommerce",
+      "description": "Save time and avoid errors with automatic synchronization of products, prices, inventory, and orders between Quick3 ERP and WooCommerce. Norwegian WordPress plugin with reliable background processing."
+    },
+    "getStarted": {
+      "title": "Get Started - Quick3 for WooCommerce",
+      "description": "Get started with Quick3 for WooCommerce. Install the plugin, configure API token, and start synchronizing between Quick3 ERP and WooCommerce."
+    },
+    "docs": {
+      "title": "Documentation - Quick3 for WooCommerce",
+      "description": "Documentation for Quick3 for WooCommerce. Learn how to configure and use the plugin to synchronize products, prices, and inventory between Quick3 ERP and WooCommerce."
+    },
+    "privacy": {
+      "title": "Privacy Policy - Quick3 for WooCommerce",
+      "description": "Privacy policy for Quick3 for WooCommerce."
+    }
+  }
 }
