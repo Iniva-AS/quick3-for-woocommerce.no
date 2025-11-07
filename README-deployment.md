@@ -21,6 +21,11 @@ npm run build
 
 3. Start the server:
 ```bash
+npm start
+```
+
+Or directly:
+```bash
 node dist/server/entry.mjs
 ```
 
