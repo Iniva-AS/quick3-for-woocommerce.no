@@ -1,4 +1,10 @@
+- [ ] Documentation
+  - [ ] "Merker" som egenskap i Quick3 blir til "Brand". Vise hvordan man setter opp.
+
 - [/] Make it more obvious that this is a wp plugin
+
+- [ ] Remove multi language and keep it to norwegian only
+
 - [ ] More focus on support
 - [ ] Make videos showing the integration. Should have quick3 test env for demo tho
 
