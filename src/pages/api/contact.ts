@@ -38,6 +38,10 @@ function escapeHtml(text: string): string {
     .replace(/'/g, '&#039;');
 }
 
+function sanitizeName(name: string): string {
+  return name.slice(0, 100).replace(/[<>]/g, '');
+}
+
 export const POST: APIRoute = async ({ request }) => {
   // Validate content type
   const contentType = request.headers.get('content-type');
@@ -187,7 +191,7 @@ export const POST: APIRoute = async ({ request }) => {
         name: 'Quick3 for WooCommerce'
       },
       to: [{ email: recipientEmail }],
-      replyTo: { email: email, name: name },
+      replyTo: { email: email, name: sanitizeName(name) },
       subject: `Ny kontaktforespørsel fra ${escapeHtml(name)}`,
       htmlContent: emailHtml
     });
