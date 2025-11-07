@@ -5,9 +5,14 @@
 Set these environment variables on your production Node.js server:
 
 ```bash
+# Required - Brevo API Configuration
 BREVO_API_KEY=your_production_brevo_api_key
 CONTACT_FORM_RECIPIENT=support@iniva.no
 FROM_EMAIL=noreply@quick3-for-woocommerce.no
+
+# Optional - Server Configuration
+PORT=3000          # Default: 4321 (change if port conflicts)
+HOST=0.0.0.0       # Default: localhost (use 0.0.0.0 for external access)
 ```
 
 ## Build and Deploy
