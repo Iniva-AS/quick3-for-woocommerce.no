@@ -29,6 +29,15 @@ function isValidEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export const POST: APIRoute = async ({ request }) => {
   // Validate content type
   const contentType = request.headers.get('content-type');
@@ -138,27 +147,27 @@ export const POST: APIRoute = async ({ request }) => {
         <div class="content">
           <div class="field">
             <div class="label">Navn</div>
-            <div class="value">${name}</div>
+            <div class="value">${escapeHtml(name)}</div>
           </div>
           ${company ? `
           <div class="field">
             <div class="label">Selskap</div>
-            <div class="value">${company}</div>
+            <div class="value">${escapeHtml(company)}</div>
           </div>
           ` : ''}
           <div class="field">
             <div class="label">E-post</div>
-            <div class="value"><a href="mailto:${email}">${email}</a></div>
+            <div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
           </div>
           ${phoneNumber ? `
           <div class="field">
             <div class="label">Telefon</div>
-            <div class="value">${phoneNumber}</div>
+            <div class="value">${escapeHtml(phoneNumber)}</div>
           </div>
           ` : ''}
           <div class="field">
             <div class="label">Melding</div>
-            <div class="value">${message.replace(/\n/g, '<br>')}</div>
+            <div class="value">${escapeHtml(message).replace(/\n/g, '<br>')}</div>
           </div>
           <div class="footer">
             <p>Mottatt: ${submissionTime}</p>
@@ -179,7 +188,7 @@ export const POST: APIRoute = async ({ request }) => {
       },
       to: [{ email: recipientEmail }],
       replyTo: { email: email, name: name },
-      subject: `Ny kontaktforespørsel fra ${name}`,
+      subject: `Ny kontaktforespørsel fra ${escapeHtml(name)}`,
       htmlContent: emailHtml
     });
 
