@@ -29,6 +29,16 @@ Or use a process manager like PM2:
 pm2 start dist/server/entry.mjs --name quick3-website
 ```
 
+## Rate Limiting Behavior
+
+The contact form includes rate limiting (5 submissions per hour per email address) to prevent spam. Note the following:
+
+- Rate limits are stored in server memory and will reset on server restart
+- Rate limiting will not work correctly with horizontal scaling (multiple server instances)
+- For production deployments with load balancing, consider implementing Redis or database-backed rate limiting
+
+For single-server deployments, the current implementation is sufficient.
+
 ## Verification
 
 After deployment:
